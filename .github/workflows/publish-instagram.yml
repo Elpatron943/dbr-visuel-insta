@@ -35,7 +35,7 @@ jobs:
         run: |
           git config user.name "dbr-visuel-insta-bot"
           git config user.email "actions@github.com"
-          git add instagram/*/published.json instagram/*/skipped.json 2>/dev/null || true
+          for f in instagram/*/published.json instagram/*/skipped.json; do [ -f "$f" ] && git add "$f"; done
           if ! git diff --cached --quiet; then
             git commit -m "Carrousels Instagram publiés"
             git pull --rebase origin main
