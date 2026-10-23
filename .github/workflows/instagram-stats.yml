@@ -1,0 +1,41 @@
+name: Relevé des statistiques Instagram
+
+on:
+  schedule:
+    - cron: "17 5 * * *"
+  push:
+    branches: [main]
+    paths: [".github/stats-trigger"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: instagram-stats
+  cancel-in-progress: false
+
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+    environment: Instagram
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+        run: node scripts/instagram-stats.mjs
+      - name: Enregistrer le relevé
+        run: |
+          git config user.name "dbr-visuel-insta-bot"
+          git config user.email "actions@github.com"
+          git add stats/
+          if ! git diff --cached --quiet; then
+            git commit -m "Relevé des statistiques Instagram"
+            git pull --rebase origin main
+            git push
+          fi
