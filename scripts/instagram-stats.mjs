@@ -44,6 +44,12 @@ try {
       const ins = await get(`${m.id}/insights`, { metric: "reach,views,saved,shares,total_interactions" });
       for (const d of ins.data || []) item[d.name] = d.values?.[0]?.value ?? d.total_value?.value ?? null;
     } catch (e) { item.insights_error = e.message; }
+    if (item.type === "REELS") {
+      try {
+        const rr = await get(`${m.id}/insights`, { metric: "ig_reels_avg_watch_time,ig_reels_video_view_total_time" });
+        for (const d of rr.data || []) item[d.name] = d.values?.[0]?.value ?? d.total_value?.value ?? null; // millisecondes
+      } catch (e) { item.reels_insights_error = e.message; }
+    }
     out.media.push(item);
   }
 } catch (e) { out.errors.push(`publications : ${e.message}`); }

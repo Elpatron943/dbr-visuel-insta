@@ -112,6 +112,9 @@ def main():
     open(ass, "w", encoding="utf-8").write(build_ass(words, a.hook, dur))
 
     zooms = [tuple(map(float, z.split("-"))) for z in a.zooms.split(",") if z]
+    # accroche visuelle : zoom franc dès la première image (0 à 0,7 s), toujours présent
+    if not any(x <= 0.1 for x, _ in zooms):
+        zooms = [(0.0, 0.7)] + zooms
     zexpr = "1" + "".join(f"+0.10*between(t,{x},{y})" for x, y in zooms) if zooms else "1"
     # zoom léger permanent (1,02 → 1,05) pour donner du mouvement, + zooms francs sur les phrases fortes
     z = f"({zexpr})*(1.02+0.03*t/{dur:.2f})"
@@ -122,7 +125,7 @@ def main():
         f"drawbox=x=0:y=ih-14:w='iw*t/{dur:.3f}':h=14:color=0xF5C542@0.95:t=fill"
     )
     # bruitages : un « whoosh » à l'ouverture, un « pop » à chaque zoom
-    pops = [0.05] + [x for x, _ in zooms]
+    pops = [0.05] + [x for x, _ in zooms if x > 0.1]
     sfx_inputs, sfx_labels = [], []
     for k, t0 in enumerate(pops):
         if k == 0:
