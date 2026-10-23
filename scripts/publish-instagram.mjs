@@ -1,6 +1,8 @@
-// Publie sur Instagram les carrousels préparés par Nora, UNIQUEMENT s'ils ont été validés par le fondateur.
+// Publie sur Instagram les carrousels et les réels préparés par Nora, UNIQUEMENT s'ils ont été validés.
 // Un carrousel = instagram/<slug>/post.json + 2 à 10 images JPEG dans le même dossier.
 // post.json : { "publish_at": "2026-10-14T10:15:00Z", "approved": false, "caption": "…", "images": ["01.jpg", …], "approval_id": "…" }
+// Un réel = instagram/<slug>/post.json + une vidéo MP4 (9:16) dans le même dossier.
+// post.json : { "type": "reel", "publish_at": "…", "approved": false, "caption": "…", "video": "reel.mp4", "approval_id": "…" }
 // Le dépôt est public : ce script ne doit JAMAIS écrire le jeton ni une URL qui le contient dans les journaux.
 import fs from "node:fs";
 import path from "node:path";
@@ -46,8 +48,8 @@ async function graph(method, p, params = {}) {
   }
   return json;
 }
-async function waitFinished(id, label) {
-  for (let i = 0; i < 30; i++) {
+async function waitFinished(id, label, tries = 30) {
+  for (let i = 0; i < tries; i++) {
     const s = await graph("GET", id, { fields: "status_code" });
     if (s.status_code === "FINISHED") return;
     if (s.status_code === "ERROR" || s.status_code === "EXPIRED") throw new Error(`${label} : statut ${s.status_code}`);
@@ -57,8 +59,25 @@ async function waitFinished(id, label) {
 }
 
 let failures = 0;
-for (const { dir, m } of due.slice(0, 1)) { // un seul carrousel par passage
+for (const { dir, m } of due.slice(0, 1)) { // une seule publication par passage
   try {
+    if (m.type === "reel") {
+      const video = String(m.video || "");
+      if (!/\.mp4$/i.test(video)) throw new Error("réel : il faut une vidéo .mp4 (champ video)");
+      if (!fs.existsSync(path.join(dir, video))) throw new Error(`vidéo manquante : ${video}`);
+      const caption = String(m.caption || "");
+      if (caption.length > 2200) throw new Error("légende de plus de 2 200 caractères");
+      if ((caption.match(/#/g) || []).length > 30) throw new Error("plus de 30 hashtags");
+      const videoUrl = `https://raw.githubusercontent.com/${REPO}/${process.env.GITHUB_SHA}/${dir}/${encodeURIComponent(video)}`;
+      const reel = await graph("POST", `${IG_ID}/media`, { media_type: "REELS", video_url: videoUrl, caption, share_to_feed: "true" });
+      await waitFinished(reel.id, "réel", 90); // jusqu'à 6 minutes de traitement vidéo
+      const pub = await graph("POST", `${IG_ID}/media_publish`, { creation_id: reel.id });
+      let permalink = null;
+      try { permalink = (await graph("GET", pub.id, { fields: "permalink" })).permalink || null; } catch {}
+      fs.writeFileSync(path.join(dir, "published.json"), JSON.stringify({ media_id: pub.id, permalink, approval_id: m.approval_id || null, at: new Date().toISOString() }, null, 1));
+      console.log(`${dir} : réel publié sur Instagram ${permalink || pub.id}`);
+      continue;
+    }
     const images = (m.images || []).filter((f) => /\.jpe?g$/i.test(f));
     if (images.length < 2 || images.length > 10) throw new Error(`il faut 2 à 10 images JPEG (trouvé ${images.length})`);
     for (const f of images) if (!fs.existsSync(path.join(dir, f))) throw new Error(`image manquante : ${f}`);

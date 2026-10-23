@@ -1,4 +1,4 @@
-name: Publier les carrousels Instagram validés
+name: Publier les carrousels et réels Instagram validés
 
 on:
   schedule:
@@ -19,7 +19,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     environment: Instagram
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -37,7 +37,7 @@ jobs:
           git config user.email "actions@github.com"
           for f in instagram/*/published.json instagram/*/skipped.json; do [ -f "$f" ] && git add "$f"; done
           if ! git diff --cached --quiet; then
-            git commit -m "Carrousels Instagram publiés"
+            git commit -m "Publications Instagram enregistrées"
             git pull --rebase origin main
             git push
           fi
