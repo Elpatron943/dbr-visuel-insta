@@ -1,5 +1,5 @@
 {
- "at": "2026-10-23T18:04:42.569Z",
+ "at": "2026-10-23T18:23:43.626Z",
  "account": {
   "username": "aryanadbr",
   "followers": 0,
@@ -7,8 +7,8 @@
   "media_count": 3
  },
  "last_7_days": {
-  "reach": 6,
-  "views": 6,
+  "reach": 7,
+  "views": 9,
   "accounts_engaged": 0,
   "total_interactions": 0,
   "follows_and_unfollows": null
@@ -21,11 +21,13 @@
    "first_line": "Tu sais qu'il ne va pas signer. Mais tu te racontes une histoire. 🎙️",
    "likes": 0,
    "comments": 0,
-   "reach": 5,
-   "views": 7,
+   "reach": 8,
+   "views": 10,
    "saved": 0,
    "shares": 0,
-   "total_interactions": 0
+   "total_interactions": 0,
+   "ig_reels_avg_watch_time": 3389,
+   "ig_reels_video_view_total_time": 33892
   },
   {
    "permalink": "https://www.instagram.com/p/DeyQgSWlrL_/",
