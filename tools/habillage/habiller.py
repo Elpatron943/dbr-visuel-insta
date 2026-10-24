@@ -61,7 +61,7 @@ def groups(words, max_words=3, max_chars=16):
     if cur: gs.append(cur)
     return gs
 
-def build_ass(words, hook, dur, hook_until=2.8):
+def build_ass(words, hook, dur, hook_until=2.8, keyword="", end_card=3.0):
     head = f"""[Script Info]
 ScriptType: v4.00+
 PlayResX: 1080
@@ -72,6 +72,9 @@ WrapStyle: 0
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
 Style: Cap,DBR Manrope Heavy,104,&H00FAFAFA,&H00FAFAFA,&H000A0A0D,&H96000000,0,0,0,0,100,100,0,0,1,9,4,2,50,50,500,1
 Style: Hook,DBR Manrope Heavy,80,&H00FAFAFA,&H00FAFAFA,&H000A0A0D,&HD00A0A0D,0,0,0,0,100,100,0,0,3,26,0,8,110,110,120,1
+Style: KwTop,DBR Manrope Heavy,64,&H00FAFAFA,&H00FAFAFA,&H000A0A0D,&H00000000,0,0,0,0,100,100,4,0,1,6,0,5,60,60,0,1
+Style: Kw,DBR Manrope Heavy,190,&H0042C5F5,&H0042C5F5,&H000A0A0D,&H00000000,0,0,0,0,100,100,2,0,1,12,6,5,40,40,0,1
+Style: KwSub,DBR Manrope Bold,50,&H00FAFAFA,&H00FAFAFA,&H000A0A0D,&H00000000,0,0,0,0,100,100,0,0,1,5,0,5,60,60,0,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -79,7 +82,17 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     ev = []
     if hook:
         ev.append(f"Dialogue: 2,{ass_t(0)},{ass_t(hook_until)},Hook,,0,0,0,,{{\\fad(120,250)\\t(0,180,\\fscx104\\fscy104)\\t(180,320,\\fscx100\\fscy100)}}{hook.upper()}")
+    if keyword:
+        # carton final « Commente <MOT> » : 3 dernières secondes, moitié haute (ne cache ni la bouche ni le micro)
+        t0 = max(0.0, dur - end_card)
+        kw = keyword.upper()
+        size = 190 if len(kw) <= 7 else int(190 * 7 / len(kw))
+        ev.append(f"Dialogue: 3,{ass_t(t0)},{ass_t(dur)},KwTop,,0,0,0,,{{\\an5\\pos(540,1150)\\fad(150,0)}}COMMENTE")
+        ev.append(f"Dialogue: 3,{ass_t(t0)},{ass_t(dur)},Kw,,0,0,0,,{{\\an5\\pos(540,1310)\\fs{size}\\fad(120,0)\\fscx70\\fscy70\\t(0,220,\\fscx108\\fscy108)\\t(220,380,\\fscx100\\fscy100)}}{kw}")
+        ev.append(f"Dialogue: 3,{ass_t(t0+0.25)},{ass_t(dur)},KwSub,,0,0,0,,{{\\an5\\pos(540,1460)\\fad(200,0)}}abonne-toi · guide complet en message privé")
     for g in groups(words):
+        if keyword and g[0][1] >= dur - end_card:
+            continue  # pas de sous-titres pendant le carton final
         g_end = g[-1][2]
         for i, (w, a, z) in enumerate(g):
             end = g[i + 1][1] if i + 1 < len(g) else g_end + 0.12
@@ -101,6 +114,7 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument("video"); p.add_argument("srt"); p.add_argument("out")
     p.add_argument("--hook", default="")
+    p.add_argument("--keyword", default="", help="mot à commenter, affiché en carton final")
     p.add_argument("--zooms", default="", help="intervalles en secondes, ex 9.5-11,24-30")
     p.add_argument("--fonts", default=os.path.join(os.path.dirname(os.path.abspath(__file__)), "fonts"))
     a = p.parse_args()
@@ -109,7 +123,7 @@ def main():
     words = words_with_times(parse_srt(a.srt))
     tmp = tempfile.mkdtemp()
     ass = os.path.join(tmp, "habillage.ass")
-    open(ass, "w", encoding="utf-8").write(build_ass(words, a.hook, dur))
+    open(ass, "w", encoding="utf-8").write(build_ass(words, a.hook, dur, keyword=a.keyword))
 
     zooms = [tuple(map(float, z.split("-"))) for z in a.zooms.split(",") if z]
     # accroche visuelle : zoom franc dès la première image (0 à 0,7 s), toujours présent

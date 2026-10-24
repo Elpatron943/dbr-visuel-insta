@@ -10,9 +10,15 @@ Carrousels Instagram de Daily Business Review, préparés par Nora (agent studio
 
 Dépôt public : uniquement des visuels destinés à être publiés, jamais de jeton ni de donnée privée.
 
-## « Commente le mot » : envoi automatique du guide (depuis le 24 oct. 2026)
-- Chaque réel se termine par « Commente <MOT>, je t'envoie le guide complet ». Nora ajoute dans `post.json` : `"keyword"`, `"guide_title"`, `"guide_url"` (guide du sujet sur daily-business-review.com/blog/guide-…).
-- L'action « Envoyer le guide aux commentaires avec le mot-clé » passe toutes les 10 minutes : pour chaque commentaire contenant le mot (accents et majuscules indifférents) sous un contenu publié depuis moins de 7 jours, elle envoie **une réponse privée** avec le lien du guide (une seule par personne et par contenu), puis une courte réponse publique « C'est parti en message privé 📩 ».
-- Droits du jeton requis : `instagram_business_manage_comments` et `instagram_business_manage_messages` ; dans l'app Instagram, « Autoriser l'accès aux messages » activé. État dans `engagement/status.json`.
-- Le dépôt étant public, seuls des compteurs (`engagement/stats.json`) et des empreintes de commentaires (`engagement/handled.json`) sont enregistrés : aucun nom, aucun texte de commentaire.
+## « Commente le mot » : envoi automatique du guide aux abonnés (depuis le 24 oct. 2026)
+- Chaque réel se termine par « Commente <MOT>, je t'envoie le guide complet » (carton final : `habiller.py --keyword <MOT>`). Nora ajoute dans `post.json` : `"keyword"`, `"guide_title"`, `"guide_url"`.
+- L'action « Envoyer le guide aux commentaires avec le mot-clé » passe toutes les 10 minutes :
+  1. commentaire contenant le mot (accents et majuscules indifférents), contenu publié depuis moins de 7 jours → réponse privée « réservé aux abonnés : abonne-toi puis réponds GUIDE » + courte réponse publique ;
+  2. la personne répond → vérification de l'abonnement (`is_user_follow_business`) → abonnée : lien du guide ; pas encore : un rappel (2 au plus).
+- Droits du jeton requis : `instagram_business_manage_comments` et `instagram_business_manage_messages` ; dans l'app Instagram, « Autoriser l'accès aux messages » activé. État dans `engagement/status.json`, compteurs dans `engagement/stats.json`.
+- Dépôt public : seuls des compteurs et des empreintes (`engagement/handled.json`) sont enregistrés, aucun nom ni texte.
 - Essai à blanc : lancer l'action à la main avec « Essai à blanc » coché.
+
+## Couverture des réels (depuis le 24 oct. 2026)
+- `tools/couverture/couverture.py reel.mp4 cover.jpg --at <s> --text "Ligne 1|Ligne 2" --gold <mot> --tag "<sujet>" --format A|B|C` : image 1080 × 1920 tirée de la vidéo, texte court très visible, étiquette du sujet colorée selon le format, tout dans la zone visible de la grille (3:4).
+- `post.json` : `"cover": "cover.jpg"` ; l'action de publication l'envoie comme couverture du réel (`cover_url`).

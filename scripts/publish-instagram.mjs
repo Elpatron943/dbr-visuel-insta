@@ -69,7 +69,10 @@ for (const { dir, m } of due.slice(0, 1)) { // une seule publication par passage
       if (caption.length > 2200) throw new Error("légende de plus de 2 200 caractères");
       if ((caption.match(/#/g) || []).length > 30) throw new Error("plus de 30 hashtags");
       const videoUrl = `https://raw.githubusercontent.com/${REPO}/${process.env.GITHUB_SHA}/${dir}/${encodeURIComponent(video)}`;
-      const reel = await graph("POST", `${IG_ID}/media`, { media_type: "REELS", video_url: videoUrl, caption, share_to_feed: "true" });
+      const params = { media_type: "REELS", video_url: videoUrl, caption, share_to_feed: "true" };
+      // couverture personnalisée (texte visible) : cover.jpg dans le dossier, champ "cover" de post.json
+      if (m.cover && fs.existsSync(path.join(dir, m.cover))) params.cover_url = `https://raw.githubusercontent.com/${REPO}/${process.env.GITHUB_SHA}/${dir}/${encodeURIComponent(m.cover)}`;
+      const reel = await graph("POST", `${IG_ID}/media`, params);
       await waitFinished(reel.id, "réel", 90); // jusqu'à 6 minutes de traitement vidéo
       const pub = await graph("POST", `${IG_ID}/media_publish`, { creation_id: reel.id });
       let permalink = null;
