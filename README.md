@@ -1,4 +1,4 @@
-# DBR — carrousels Instagram
+# DBR | carrousels Instagram
 
 Carrousels Instagram de Daily Business Review, préparés par Nora (agent studio) et publiés **uniquement après validation du fondateur**.
 

@@ -4,10 +4,10 @@
 // post.json du contenu : { …, "keyword": "CHAMPION", "guide_title": "Guide complet : construire un Champion",
 //                         "guide_url": "https://daily-business-review.com/blog/guide-construire-un-champion" }
 //
-// Étape 1 — commentaires (contenus publiés depuis moins de 7 jours, fenêtre des réponses privées d'Instagram) :
+// Étape 1, commentaires (contenus publiés depuis moins de 7 jours, fenêtre des réponses privées d'Instagram) :
 //   commentaire contenant le mot (majuscules, minuscules, accents indifférents) → une réponse privée qui demande
 //   de s'abonner puis de répondre GUIDE, et une courte réponse publique sous le commentaire.
-// Étape 2 — messages : quand la personne répond, on vérifie qu'elle est abonnée (is_user_follow_business) :
+// Étape 2, messages : quand la personne répond, on vérifie qu'elle est abonnée (is_user_follow_business) :
 //   abonnée → envoi du lien du guide ; pas encore abonnée → un rappel (2 au plus), puis on s'arrête.
 // Instagram ne permet de vérifier l'abonnement qu'après un message de la personne : d'où la réponse « GUIDE ».
 // Droits du jeton : instagram_business_basic, instagram_business_manage_comments, instagram_business_manage_messages.
@@ -127,12 +127,12 @@ if (!forConvs.length) {
     const id = media.data?.[0]?.id;
     if (id) { await call("GET", `${id}/comments`, { params: { fields: "id", limit: "1" } }); droits.commentaires = "ok"; }
     else droits.commentaires = "aucune publication pour tester";
-  } catch (e) { droits.commentaires = `refusé — ${e.message}`; }
+  } catch (e) { droits.commentaires = `refusé, ${e.message}`; }
   try { await call("GET", `${IG_ID}/conversations`, { params: { platform: "instagram", fields: "id", limit: "1" } }); droits.messages = "ok"; }
-  catch (e) { droits.messages = `refusé — ${e.message}`; }
+  catch (e) { droits.messages = `refusé, ${e.message}`; }
   const ok = droits.commentaires !== undefined && !String(droits.commentaires).startsWith("refusé") && droits.messages === "ok";
-  writeStatus({ dm: ok ? "ok" : "refusé — droits incomplets", droits, note: "aucun contenu avec mot-clé : vérification des droits seulement" });
-  console.log(`::notice::Droits du jeton — commentaires : ${droits.commentaires} ; messages : ${droits.messages}`);
+  writeStatus({ dm: ok ? "ok" : "refusé, droits incomplets", droits, note: "aucun contenu avec mot-clé : vérification des droits seulement" });
+  console.log(`::notice::Droits du jeton, commentaires : ${droits.commentaires} ; messages : ${droits.messages}`);
   process.exit(ok ? 0 : 1);
 }
 const send = (recipient, text) => call("POST", `${IG_ID}/messages`, { json: { recipient, message: { text } } });
@@ -259,6 +259,6 @@ if (!blocked && !DRY) {
 
 fs.writeFileSync(HANDLED, JSON.stringify(handled) + "\n");
 fs.writeFileSync(STATS, JSON.stringify(stats, null, 1) + "\n");
-writeStatus({ dm: blocked ? `refusé — ${blocked}` : "ok", ...(count.invitations + count.guides + count.rappels + count.echecs ? { dernier_passage_actif: count } : {}) });
+writeStatus({ dm: blocked ? `refusé, ${blocked}` : "ok", ...(count.invitations + count.guides + count.rappels + count.echecs ? { dernier_passage_actif: count } : {}) });
 if (blocked) { console.log(`::error::${blocked}. Le jeton doit avoir les droits instagram_business_manage_comments et instagram_business_manage_messages, et « Autoriser l'accès aux messages » doit être activé dans l'app Instagram.`); process.exit(1); }
 console.log(`::notice::Invitations : ${count.invitations}, guides envoyés : ${count.guides}, rappels : ${count.rappels}, échecs : ${count.echecs}${DRY ? " (essai à blanc)" : ""}`);

@@ -115,7 +115,7 @@ for (const { dir, m } of due.slice(0, 1)) { // une seule publication par passage
     console.log(`${dir} : publié sur Instagram ${permalink || pub.id}`);
   } catch (e) {
     failures++;
-    console.error(`::error::${dir} : ÉCHEC — ${e.message}`);
+    console.error(`::error::${dir} : ÉCHEC, ${e.message}`);
   }
 }
 process.exit(failures ? 1 : 0);
