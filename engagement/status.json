@@ -1,11 +1,6 @@
 {
- "at": "2026-10-24T05:29:06.089Z",
+ "at": "2026-10-24T09:26:05.701Z",
  "dry_run": false,
- "contenus_suivis": 0,
- "dm": "ok",
- "droits": {
-  "commentaires": "ok",
-  "messages": "ok"
- },
- "note": "aucun contenu avec mot-clé : vérification des droits seulement"
+ "contenus_suivis": 1,
+ "dm": "ok"
 }
