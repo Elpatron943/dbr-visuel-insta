@@ -1,0 +1,60 @@
+{
+ "at": "2026-10-24T09:33:44.160Z",
+ "account": {
+  "username": "aryanadbr",
+  "followers": 62,
+  "following": 612,
+  "media_count": 3
+ },
+ "last_7_days": {
+  "reach": 172,
+  "views": 250,
+  "accounts_engaged": 6,
+  "total_interactions": 9,
+  "follows_and_unfollows": null
+ },
+ "media": [
+  {
+   "permalink": "https://www.instagram.com/reel/De2QaeFkdre/",
+   "type": "REELS",
+   "at": "2026-10-23T18:59:43+0000",
+   "first_line": "Tu sais qu'il ne va pas signer. Mais tu te racontes une histoire. 🎙️",
+   "likes": 5,
+   "comments": 0,
+   "reach": 151,
+   "views": 169,
+   "saved": 0,
+   "shares": 0,
+   "total_interactions": 5,
+   "ig_reels_avg_watch_time": 5093,
+   "ig_reels_video_view_total_time": 814924
+  },
+  {
+   "permalink": "https://www.instagram.com/p/DeyQgSWlrL_/",
+   "type": "FEED",
+   "at": "2026-10-22T05:42:54+0000",
+   "first_line": "Ton point quotidien ne pilote rien.",
+   "likes": 2,
+   "comments": 0,
+   "reach": 23,
+   "views": 51,
+   "saved": 0,
+   "shares": 0,
+   "total_interactions": 2
+  },
+  {
+   "permalink": "https://www.instagram.com/p/DerxKHyGyAM/",
+   "type": "FEED",
+   "at": "2026-10-19T17:13:32+0000",
+   "first_line": "Empiler des deals, ce n'est pas couvrir un marché.",
+   "likes": 3,
+   "comments": 0,
+   "reach": 19,
+   "views": 26,
+   "saved": 0,
+   "shares": 0,
+   "total_interactions": 3
+  }
+ ],
+ "errors": []
+}
