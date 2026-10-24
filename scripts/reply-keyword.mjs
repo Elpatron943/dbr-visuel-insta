@@ -98,7 +98,6 @@ const writeStatus = (o) => {
   if (JSON.stringify(rest) === JSON.stringify(next)) return;
   fs.writeFileSync(STATUS, JSON.stringify({ at: new Date().toISOString(), ...next }, null, 1) + "\n");
 };
-if (!forConvs.length) { writeStatus({ dm: "rien à traiter" }); console.log("Aucun contenu publié avec mot-clé récemment."); process.exit(0); }
 if (!TOKEN || !IG_ID) { console.error("::error::Secrets IG_ACCESS_TOKEN et IG_USER_ID requis."); process.exit(1); }
 
 async function call(method, p, { params = {}, json } = {}) {
@@ -119,6 +118,22 @@ async function call(method, p, { params = {}, json } = {}) {
   return body;
 }
 const isPermission = (e) => [10, 190, 200, 3].includes(e.code) && !/window|outside|fen[eê]tre/i.test(e.message);
+// Rien à traiter : on vérifie seulement les droits du jeton (lecture des commentaires et des messages, sans rien envoyer).
+if (!forConvs.length) {
+  const droits = {};
+  try {
+    const media = await call("GET", `${IG_ID}/media`, { params: { fields: "id", limit: "1" } });
+    const id = media.data?.[0]?.id;
+    if (id) { await call("GET", `${id}/comments`, { params: { fields: "id", limit: "1" } }); droits.commentaires = "ok"; }
+    else droits.commentaires = "aucune publication pour tester";
+  } catch (e) { droits.commentaires = `refusé — ${e.message}`; }
+  try { await call("GET", `${IG_ID}/conversations`, { params: { platform: "instagram", fields: "id", limit: "1" } }); droits.messages = "ok"; }
+  catch (e) { droits.messages = `refusé — ${e.message}`; }
+  const ok = droits.commentaires !== undefined && !String(droits.commentaires).startsWith("refusé") && droits.messages === "ok";
+  writeStatus({ dm: ok ? "ok" : "refusé — droits incomplets", droits, note: "aucun contenu avec mot-clé : vérification des droits seulement" });
+  console.log(`::notice::Droits du jeton — commentaires : ${droits.commentaires} ; messages : ${droits.messages}`);
+  process.exit(ok ? 0 : 1);
+}
 const send = (recipient, text) => call("POST", `${IG_ID}/messages`, { json: { recipient, message: { text } } });
 const st = (slug, kw) => (stats[slug] ||= { keyword: kw, commentaires_avec_mot: 0, invitations: 0, guides_envoyes: 0, rappels_non_abonnes: 0, echecs: 0 });
 
