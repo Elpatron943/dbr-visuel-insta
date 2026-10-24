@@ -5,3 +5,5 @@ Mini-application web (Netlify) qui relie le compte Instagram professionnel à DB
 - Site Netlify : base `connect/`, publication `public/`, fonctions `netlify/functions/`.
 - Variable d'environnement obligatoire (Netlify) : `IG_APP_SECRET` (clé secrète Instagram de l'app Meta). Jamais dans le dépôt.
 - URL de redirection à déclarer dans Meta : `https://<site>/api/callback`.
+
+Clé `IG_APP_SECRET` ajoutée dans Netlify le 24 oct. 2026.
