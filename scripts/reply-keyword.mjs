@@ -23,7 +23,8 @@ const IG_ID = process.env.IG_USER_ID;
 const HOST = process.env.IG_GRAPH_HOST || "https://graph.instagram.com";
 const VERSION = process.env.IG_GRAPH_VERSION || "v23.0";
 const DRY = process.env.DRY_RUN === "1";
-const COMMENT_WINDOW_DAYS = 7;
+const COMMENT_WINDOW_DAYS = 7; // réponse privée possible 7 jours après le commentaire
+const POST_WINDOW_DAYS = 45; // contenus suivis : publiés depuis 45 jours au plus
 const CONV_WINDOW_DAYS = 10;
 const MAX_REMINDERS = 2;
 const MAX_SEND_PER_RUN = 80;
@@ -87,8 +88,8 @@ for (const d of fs.existsSync(root) ? fs.readdirSync(root) : []) {
   const at = Date.parse(p.at || m.publish_at);
   all.push({ slug: d, m, media: p.media_id, at, key: norm(m.keyword).replace(/[^A-Z0-9]/g, "") });
 }
-const forComments = all.filter((t) => Number.isFinite(t.at) && now - t.at <= COMMENT_WINDOW_DAYS * 864e5);
-const forConvs = all.filter((t) => Number.isFinite(t.at) && now - t.at <= (COMMENT_WINDOW_DAYS + CONV_WINDOW_DAYS) * 864e5);
+const forComments = all.filter((t) => Number.isFinite(t.at) && now - t.at <= POST_WINDOW_DAYS * 864e5);
+const forConvs = all.filter((t) => Number.isFinite(t.at) && now - t.at <= (POST_WINDOW_DAYS + CONV_WINDOW_DAYS) * 864e5);
 const byTitle = new Map(all.map((t) => [shortTitle(t.m), t]));
 
 const writeStatus = (o) => {
@@ -164,6 +165,7 @@ for (const t of forComments) {
   }
   for (const c of comments) {
     if (ours(c.from)) continue;
+    if (c.timestamp && now - Date.parse(c.timestamp) > COMMENT_WINDOW_DAYS * 864e5) continue; // trop ancien pour une réponse privée
     if (!words(c.text).includes(t.key)) continue;
     const who = c.from?.id || c.username || c.id;
     const hc = hash(`c:${c.id}`), hu = hash(`u:${t.slug}:${who}`);
