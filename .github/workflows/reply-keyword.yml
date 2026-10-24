@@ -1,0 +1,49 @@
+name: Envoyer le guide aux commentaires avec le mot-clé
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  push:
+    branches: [main]
+    paths: [".github/keyword-trigger"]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Essai à blanc (aucun envoi)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: reply-keyword
+  cancel-in-progress: false
+
+jobs:
+  reply:
+    runs-on: ubuntu-latest
+    environment: Instagram
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Lire les commentaires et envoyer le guide
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          DRY_RUN: ${{ inputs.dry_run && '1' || '0' }}
+        run: node scripts/reply-keyword.mjs
+      - name: Enregistrer le suivi (empreintes et compteurs seulement)
+        if: always()
+        run: |
+          git config user.name "dbr-visuel-insta-bot"
+          git config user.email "actions@github.com"
+          git add engagement/ 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            git commit -m "Suivi des envois de guides"
+            git pull --rebase origin main
+            git push
+          fi
