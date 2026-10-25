@@ -3,6 +3,8 @@
 // post.json : { "publish_at": "2026-10-14T10:15:00Z", "approved": false, "caption": "…", "images": ["01.jpg", …], "approval_id": "…" }
 // Un réel = instagram/<slug>/post.json + une vidéo MP4 (9:16) dans le même dossier.
 // post.json : { "type": "reel", "publish_at": "…", "approved": false, "caption": "…", "video": "reel.mp4", "approval_id": "…" }
+// Republication (scripts/republish-instagram.mjs) : post.json peut contenir "republication_of": "<dossier d'origine>". Le dossier ne contient alors
+// que post.json (puis published.json) : la vidéo, la couverture et les images sont lues dans le dossier d'origine (pas de copie de fichiers lourds).
 // Le dépôt est public : ce script ne doit JAMAIS écrire le jeton ni une URL qui le contient dans les journaux.
 import fs from "node:fs";
 import path from "node:path";
@@ -61,17 +63,25 @@ async function waitFinished(id, label, tries = 30) {
 let failures = 0;
 for (const { dir, m } of due.slice(0, 1)) { // une seule publication par passage
   try {
+    // Dossier des médias : le dossier lui-même, ou le dossier d'origine pour une republication (même contenu, mêmes fichiers).
+    let mediaDir = dir;
+    if (m.republication_of) {
+      const src = String(m.republication_of);
+      if (!/^[a-z0-9][a-z0-9-]*$/.test(src)) throw new Error(`republication_of invalide : ${src}`);
+      mediaDir = path.join(root, src);
+      if (!fs.existsSync(path.join(mediaDir, "post.json"))) throw new Error(`dossier d'origine introuvable : ${src}`);
+    }
     if (m.type === "reel") {
       const video = String(m.video || "");
       if (!/\.mp4$/i.test(video)) throw new Error("réel : il faut une vidéo .mp4 (champ video)");
-      if (!fs.existsSync(path.join(dir, video))) throw new Error(`vidéo manquante : ${video}`);
+      if (!fs.existsSync(path.join(mediaDir, video))) throw new Error(`vidéo manquante : ${video}`);
       const caption = String(m.caption || "");
       if (caption.length > 2200) throw new Error("légende de plus de 2 200 caractères");
       if ((caption.match(/#/g) || []).length > 30) throw new Error("plus de 30 hashtags");
-      const videoUrl = `https://raw.githubusercontent.com/${REPO}/${process.env.GITHUB_SHA}/${dir}/${encodeURIComponent(video)}`;
+      const videoUrl = `https://raw.githubusercontent.com/${REPO}/${process.env.GITHUB_SHA}/${mediaDir}/${encodeURIComponent(video)}`;
       const params = { media_type: "REELS", video_url: videoUrl, caption, share_to_feed: "true" };
       // couverture personnalisée (texte visible) : cover.jpg dans le dossier, champ "cover" de post.json
-      if (m.cover && fs.existsSync(path.join(dir, m.cover))) params.cover_url = `https://raw.githubusercontent.com/${REPO}/${process.env.GITHUB_SHA}/${dir}/${encodeURIComponent(m.cover)}`;
+      if (m.cover && fs.existsSync(path.join(mediaDir, m.cover))) params.cover_url = `https://raw.githubusercontent.com/${REPO}/${process.env.GITHUB_SHA}/${mediaDir}/${encodeURIComponent(m.cover)}`;
       const reel = await graph("POST", `${IG_ID}/media`, params);
       await waitFinished(reel.id, "réel", 90); // jusqu'à 6 minutes de traitement vidéo
       const pub = await graph("POST", `${IG_ID}/media_publish`, { creation_id: reel.id });
@@ -83,12 +93,12 @@ for (const { dir, m } of due.slice(0, 1)) { // une seule publication par passage
     }
     const images = (m.images || []).filter((f) => /\.jpe?g$/i.test(f));
     if (images.length < 2 || images.length > 10) throw new Error(`il faut 2 à 10 images JPEG (trouvé ${images.length})`);
-    for (const f of images) if (!fs.existsSync(path.join(dir, f))) throw new Error(`image manquante : ${f}`);
+    for (const f of images) if (!fs.existsSync(path.join(mediaDir, f))) throw new Error(`image manquante : ${f}`);
     const caption = String(m.caption || "");
     if (caption.length > 2200) throw new Error("légende de plus de 2 200 caractères");
     if ((caption.match(/#/g) || []).length > 30) throw new Error("plus de 30 hashtags");
     const sha = process.env.GITHUB_SHA;
-    const base = `https://raw.githubusercontent.com/${REPO}/${sha}/${dir}`;
+    const base = `https://raw.githubusercontent.com/${REPO}/${sha}/${mediaDir}`;
 
     const children = [];
     for (const f of images) {
@@ -105,7 +115,7 @@ for (const { dir, m } of due.slice(0, 1)) { // une seule publication par passage
     console.log(`${dir} : publié sur Instagram ${permalink || pub.id}`);
   } catch (e) {
     failures++;
-    console.error(`::error::${dir} : ÉCHEC — ${e.message}`);
+    console.error(`::error::${dir} : ÉCHEC, ${e.message}`);
   }
 }
 process.exit(failures ? 1 : 0);

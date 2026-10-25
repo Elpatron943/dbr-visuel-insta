@@ -1,4 +1,4 @@
-# DBR — carrousels Instagram
+# DBR | carrousels Instagram
 
 Carrousels Instagram de Daily Business Review, préparés par Nora (agent studio) et publiés **uniquement après validation du fondateur**.
 
@@ -22,3 +22,10 @@ Dépôt public : uniquement des visuels destinés à être publiés, jamais de j
 ## Couverture des réels (depuis le 24 oct. 2026)
 - `tools/couverture/couverture.py reel.mp4 cover.jpg --at <s> --text "Ligne 1|Ligne 2" --gold <mot> --tag "<sujet>" --format A|B|C` : image 1080 × 1920 tirée de la vidéo, texte court très visible, étiquette du sujet colorée selon le format, tout dans la zone visible de la grille (3:4).
 - `post.json` : `"cover": "cover.jpg"` ; l'action de publication l'envoie comme couverture du réel (`cover_url`).
+
+## Republication à l'identique (depuis le 24 oct. 2026)
+- L'action « Programmer les republications Instagram » (`.github/workflows/republish-instagram.yml`, `scripts/republish-instagram.mjs`) passe le **mardi et le vendredi** et programme la republication d'un carrousel ou d'un réel déjà publié depuis au moins **28 jours**, le **jeudi ou le dimanche suivant à 20 h 15** (heure de Paris), au moins 48 h plus tard.
+- Elle crée seulement `instagram/<dossier>-repub-<date>/post.json` (`"republication_of": "<dossier d'origine>"`, `"approved": true`) ; les vidéos, couvertures et images ne sont **pas copiées** : `scripts/publish-instagram.mjs` les lit dans le dossier d'origine et publie à l'heure prévue. Légende, mot-clé « Commente le mot » et guide sont ceux de l'original.
+- Choix : le contenu le plus vu d'après `stats/instagram-latest.json`, à défaut le plus ancien ; une même source ne repasse pas avant 90 jours ; au plus 2 republications par semaine.
+- **Annuler** une republication programmée : mettre `"approved": false` dans son `post.json`, ou supprimer son dossier. **Tout arrêter** : créer le fichier `republication/PAUSE` (ou désactiver l'action). Exclure un contenu : `"no_republish": true` dans son `post.json`.
+- Essai à blanc : lancer l'action à la main (« Essai à blanc » coché par défaut, `min_age_days` modifiable).

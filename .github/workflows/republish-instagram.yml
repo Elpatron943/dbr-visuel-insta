@@ -1,0 +1,51 @@
+name: Programmer les republications Instagram
+
+# Deux fois par semaine (mardi et vendredi), programme la republication à l'identique d'un carrousel ou d'un réel déjà publié
+# depuis au moins 28 jours, pour le jeudi ou le dimanche suivant à 20 h 15 (au moins 48 h plus tard, donc annulable).
+# L'action « Publier les carrousels et réels Instagram validés » la publie à l'heure prévue. Voir scripts/republish-instagram.mjs.
+# Arrêt d'urgence : créer le fichier republication/PAUSE (ou désactiver cette action).
+
+on:
+  schedule:
+    - cron: "7 8 * * 2,5"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Essai à blanc (n'écrit rien)"
+        type: boolean
+        default: true
+      min_age_days:
+        description: "Ancienneté minimale en jours du contenu à republier"
+        type: string
+        default: "28"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-instagram
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Choisir le contenu et programmer la republication
+        env:
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && '1' || '0' }}
+          MIN_AGE_DAYS: ${{ github.event_name == 'workflow_dispatch' && inputs.min_age_days || '28' }}
+        run: node scripts/republish-instagram.mjs
+      - name: Enregistrer
+        run: |
+          git config user.name "dbr-visuel-insta-bot"
+          git config user.email "actions@github.com"
+          git add instagram 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            git commit -m "Republication Instagram programmée"
+            git pull --rebase origin main && git push
+          fi

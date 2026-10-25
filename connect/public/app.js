@@ -10,7 +10,7 @@ async function load() {
   try {
     const me = await api("/api/me"); const p = me.profile; media = me.media;
     $("profile").innerHTML = `<div class="profile"><img src="${esc(p.profile_picture_url)}" alt=""><div><b>@${esc(p.username)}</b><br><span class="muted">${esc(p.name || "")}</span></div></div>
-      <div class="stats"><div><b>${p.followers_count ?? "–"}</b>abonnés</div><div><b>${p.media_count ?? "–"}</b>publications</div><div><b>${esc(p.account_type || "")}</b>type</div></div>`;
+      <div class="stats"><div><b>${p.followers_count ?? "-"}</b>abonnés</div><div><b>${p.media_count ?? "-"}</b>publications</div><div><b>${esc(p.account_type || "")}</b>type</div></div>`;
   } catch (e) { $("profile").innerHTML = `<span class="err">${esc(e.message)}</span>`; }
   try { rules = (await api("/api/rules")).rules; } catch { rules = []; }
   $("rules").innerHTML = rules.length ? rules.map((r) => `<div class="c"><div><span class="kw">${esc(r.keyword)}</span><br><small>${esc(r.guide_title)}</small></div><a class="btn ghost small" href="${esc(r.guide_url)}" target="_blank">Guide</a></div>`).join("") : "Aucune règle active pour l'instant.";
