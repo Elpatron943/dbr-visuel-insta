@@ -1,0 +1,70 @@
+name: Publier la story Instagram du jour
+
+# Chaque jour, publie en story un contenu déjà publié (réel tel quel, carrousel converti en image 9:16), à l'identique.
+# Rotation : jamais utilisé d'abord, puis le moins récemment utilisé. Voir scripts/story-instagram.mjs.
+# Arrêt d'urgence : créer le fichier stories/PAUSE (ou désactiver cette action).
+# Annuler la story d'un jour : créer stories/AAAA-MM-JJ/skipped.json avant l'heure.
+
+on:
+  schedule:
+    - cron: "40 16 * * *" # 16 h 40 UTC = 17 h 40 à Paris (heure d'hiver), 18 h 40 (heure d'été)
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Essai à blanc (choisit la story, ne publie rien et n'écrit rien)"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-instagram
+  cancel-in-progress: false
+
+jobs:
+  story:
+    runs-on: ubuntu-latest
+    environment: Instagram
+    timeout-minutes: 15
+    env:
+      DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && '1' || '0' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Installer Pillow
+        run: pip install pillow
+      - name: Choisir la story du jour
+        run: node scripts/story-instagram.mjs prepare
+      - name: Enregistrer le choix (le média doit exister dans le dépôt avant la publication)
+        if: env.DRY_RUN != '1'
+        run: |
+          git config user.name "dbr-visuel-insta-bot"
+          git config user.email "actions@github.com"
+          git add stories 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            git commit -m "Story Instagram du jour préparée"
+            git pull --rebase origin main && git push
+          fi
+      - name: Publier la story
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+        run: |
+          export GITHUB_SHA="$(git rev-parse HEAD)"
+          node scripts/story-instagram.mjs publish
+      - name: Enregistrer la publication
+        if: always() && env.DRY_RUN != '1'
+        run: |
+          git config user.name "dbr-visuel-insta-bot"
+          git config user.email "actions@github.com"
+          git add stories 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            git commit -m "Story Instagram enregistrée"
+            git pull --rebase origin main && git push
+          fi
