@@ -4,9 +4,10 @@ Dépôt public des carrousels et réels Instagram de Daily Business Review (comp
 
 ## Structure
 - `instagram/<dossier>/` : un contenu par dossier (`post.json`, médias, puis `published.json` ou `skipped.json`).
-- `scripts/` : `publish-instagram.mjs`, `reply-keyword.mjs`, `refresh-token.mjs`, `check-connection.mjs`, `instagram-stats.mjs`.
+- `scripts/` : `story-instagram.mjs`, `publish-instagram.mjs`, `reply-keyword.mjs`, `refresh-token.mjs`, `check-connection.mjs`, `instagram-stats.mjs`.
 - `.github/workflows/` : une action par script, plus `sync-supabase.yml`. Les fichiers `.github/*-trigger` servent à relancer une action par un push sur main.
 - `engagement/` (état et compteurs du mot-clé), `stats/` (relevés quotidiens), `guides/<slug>/cover.png`.
+- `stories/` (une story par jour, images 9:16 des carrousels dans `frames/`), `tools/story/frame.py` (carrousel vers 9:16).
 - `tools/couverture/couverture.py` (image de couverture d'un réel), `tools/habillage/habiller.py` (sous-titres, zooms, accroche).
 - `connect/` : application Netlify (`public/`, `netlify/functions/`), voir `connect/README.md`.
 
@@ -21,6 +22,7 @@ Dépôt public des carrousels et réels Instagram de Daily Business Review (comp
 - Synchronisation Supabase : toutes les 10 minutes, recopie les réels de Nora dans `instagram/` puis lance la publication. Elle réécrit `post.json` tant que le dossier n'a ni `published.json` ni `skipped.json`.
 - Mot-clé : toutes les 10 minutes (`reply-keyword.yml`), option « Essai à blanc » en lancement manuel. Voir le README pour le déroulé.
 - Statistiques : chaque jour à 05:17 UTC, dans `stats/`. Prolongation du jeton : le 1er et le 15 de chaque mois. Vérification de la connexion : manuelle ou par push sur `.github/check-trigger`.
+- Story du jour : `story-instagram.yml`, chaque jour à 16 h 40 UTC, republie en story un contenu déjà publié (réel tel quel, carrousel converti en image 9:16 par `tools/story/frame.py`), rotation du moins récemment utilisé, une par jour. Choix tracé dans `stories/<date>/story.json`, publication dans `published.json`. Annuler un jour : `stories/<date>/skipped.json` ; tout arrêter : fichier `stories/PAUSE` ; exclure un contenu : `"no_story": true` dans son `post.json`. Lancement manuel en essai à blanc (par défaut).
 - Secrets : `IG_ACCESS_TOKEN`, `IG_USER_ID`. Netlify : `IG_APP_SECRET`. Variable optionnelle : `SUPABASE_PUBLISHABLE_KEY`.
 
 ## Annuler ou suspendre
