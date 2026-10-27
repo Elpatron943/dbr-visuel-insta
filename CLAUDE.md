@@ -34,7 +34,6 @@ Dépôt public des carrousels et réels Instagram de Daily Business Review (comp
 ## Règles
 - Un contenu DBR est publié sur trois réseaux : Instagram @aryanadbr, X @Aryanadbr et LinkedIn. Jamais sur Instagram seul.
 - Pas de tiret long ni de demi-cadratin, pas de flèche, pas d'emoji. Écrire « pipeline », jamais « pipe ».
-- Une vidéo avec l'avatar d'Aryana est déclarée contenu généré par IA, dans la légende.
 - Rien n'est publié sans `approved: true` posé par le fondateur.
 - Dépôt public : aucun secret, aucune valeur de jeton, aucun nom ni texte de commentaire. Seuls des noms de variables et des compteurs ou empreintes. Les scripts n'écrivent jamais le jeton dans les journaux.
 - Ne jamais lancer une action de publication ni appeler l'API Instagram pour un essai.
