@@ -7,7 +7,14 @@ name: Publier la story Instagram du jour
 
 on:
   schedule:
-    - cron: "40 16 * * *" # 16 h 40 UTC = 17 h 40 à Paris (heure d'hiver), 18 h 40 (heure d'été)
+    # 16 h 40 UTC = 17 h 40 à Paris (heure d'hiver), 18 h 40 (heure d'été).
+    # GitHub retarde ou saute souvent les passages programmés (aucun passage le 27/10/2026) : quatre rattrapages,
+    # sans risque de doublon puisque le script s'arrête dès que stories/<date de Paris>/published.json existe.
+    - cron: "40 16 * * *"
+    - cron: "40 17 * * *"
+    - cron: "40 18 * * *"
+    - cron: "40 19 * * *"
+    - cron: "40 20 * * *"
   workflow_dispatch:
     inputs:
       dry_run:
