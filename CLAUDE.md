@@ -19,6 +19,7 @@ Dépôt public des carrousels et réels Instagram de Daily Business Review (comp
 
 ## Actions (toutes dans l'environnement GitHub « Instagram »)
 - Publication : toutes les 15 minutes et à chaque push sur un `post.json`. Une seule publication par passage. Publie si `approved` vaut `true` et si `publish_at` est passé. Au-delà de 7 jours de retard : `skipped.json`, à replanifier.
+- Garde-fous de publication (28 oct. 2026) : au plus une publication par jour (heure de Paris, exception `"hors_quota": true`), rien entre 21 h et 7 h, pas deux fois la même première ligne de légende en moins de 60 jours (hors `republication_of`), légende refusée si elle contient un émoji, une flèche ou un tiret long. Un contenu retenu attend sans `skipped.json`.
 - Synchronisation Supabase : toutes les 10 minutes, recopie les réels de Nora dans `instagram/` puis lance la publication. Elle réécrit `post.json` tant que le dossier n'a ni `published.json` ni `skipped.json`.
 - Mot-clé : toutes les 10 minutes (`reply-keyword.yml`), option « Essai à blanc » en lancement manuel. Voir le README pour le déroulé.
 - Statistiques : chaque jour à 05:17 UTC, dans `stats/`. Prolongation du jeton : le 1er et le 15 de chaque mois. Vérification de la connexion : manuelle ou par push sur `.github/check-trigger`.

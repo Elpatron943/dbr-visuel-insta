@@ -16,9 +16,43 @@ const VERSION = process.env.IG_GRAPH_VERSION || "v23.0";
 const REPO = process.env.GITHUB_REPOSITORY; // Elpatron943/dbr-visuel-insta
 const MAX_LATE_DAYS = 7;
 
+// Garde-fous de diffusion (audit réseaux du 28 oct. 2026) :
+// - au plus une publication par jour (heure de Paris), sauf "hors_quota": true dans post.json ;
+// - jamais la nuit : publication seulement entre OPEN_HOUR et CLOSE_HOUR (heure de Paris), sinon on attend le prochain passage ;
+// - pas deux fois le même sujet (même première ligne de légende) en moins de REPEAT_DAYS jours, hors "republication_of"
+//   (les republications suivent leurs propres règles, voir scripts/republish-instagram.mjs) ;
+// - légende refusée si elle contient un émoji, une flèche, un tiret long ou un demi-cadratin (règle de marque).
+// Un contenu retenu par un garde-fou n'est ni publié ni écarté : il attend, ou il faut corriger son post.json.
+const OPEN_HOUR = 7;
+const CLOSE_HOUR = 21;
+const REPEAT_DAYS = 60;
+const FORBIDDEN = /[–—←-⇿➔-➿⬅-⬇☀-➿️]|\p{Extended_Pictographic}/u;
+
+const parisFmt = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Paris", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", hour12: false });
+function paris(t) {
+  const p = Object.fromEntries(parisFmt.formatToParts(new Date(t)).map((x) => [x.type, x.value]));
+  return { day: `${p.year}-${p.month}-${p.day}`, hour: +p.hour % 24 };
+}
+const firstLine = (c) => String(c || "").split("\n")[0].trim().toLowerCase().replace(/\s+/g, " ");
+const readJson = (f) => { try { return JSON.parse(fs.readFileSync(f, "utf8")); } catch { return null; } };
+
 const root = "instagram";
 const dirs = fs.existsSync(root) ? fs.readdirSync(root).map((d) => path.join(root, d)).filter((d) => fs.existsSync(path.join(d, "post.json"))) : [];
 const now = Date.now();
+
+// Ce qui est déjà publié : date et première ligne de légende.
+const published = [];
+for (const dir of dirs) {
+  const p = readJson(path.join(dir, "published.json"));
+  if (!p) continue;
+  const at = Date.parse(p.at);
+  if (Number.isFinite(at)) published.push({ dir, at, line: firstLine(readJson(path.join(dir, "post.json"))?.caption) });
+}
+const today = paris(now);
+const publishedToday = published.some((p) => paris(p.at).day === today.day);
+const nightTime = today.hour < OPEN_HOUR || today.hour >= CLOSE_HOUR;
+
+let held = 0;
 const due = [];
 for (const dir of dirs) {
   if (fs.existsSync(path.join(dir, "published.json")) || fs.existsSync(path.join(dir, "skipped.json"))) continue;
@@ -31,9 +65,27 @@ for (const dir of dirs) {
     console.log(`::warning::${dir} : date dépassée de plus de ${MAX_LATE_DAYS} jours, non publié`);
     continue;
   }
+  if (FORBIDDEN.test(String(m.caption || ""))) {
+    held++;
+    console.log(`::error::${dir} : légende avec émoji, flèche ou tiret long, à corriger avant publication`);
+    continue;
+  }
+  if (!m.republication_of) {
+    const line = firstLine(m.caption);
+    const twin = line && published.find((p) => p.line === line && now - p.at < REPEAT_DAYS * 864e5);
+    if (twin) {
+      held++;
+      console.log(`::warning::${dir} : même sujet que ${twin.dir}, publié il y a moins de ${REPEAT_DAYS} jours, non publié`);
+      continue;
+    }
+  }
   due.push({ dir, m });
 }
 if (!due.length) { console.log("Aucun carrousel validé à publier maintenant."); process.exit(0); }
+const forced = due.filter(({ m }) => m.hors_quota === true);
+if (nightTime) { console.log(`Il est ${today.hour} h à Paris : aucune publication avant ${OPEN_HOUR} h ni après ${CLOSE_HOUR} h, ${due.length} contenu(s) en attente.`); process.exit(0); }
+if (publishedToday && !forced.length) { console.log(`Déjà une publication aujourd'hui (heure de Paris) : ${due.length} contenu(s) attendent demain. Exception possible avec "hors_quota": true.`); process.exit(0); }
+if (publishedToday) due.splice(0, due.length, ...forced);
 if (!TOKEN || !IG_ID) { console.error("::error::Secrets IG_ACCESS_TOKEN et IG_USER_ID requis (Settings → Secrets and variables → Actions)."); process.exit(1); }
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
