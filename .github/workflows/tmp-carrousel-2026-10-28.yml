@@ -1,0 +1,36 @@
+name: Temporaire - images du carrousel du 28/10
+on:
+  push:
+    branches: [claude/carrousel-2026-10-28-images]
+    paths: [".github/workflows/tmp-carrousel-2026-10-28.yml"]
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Télécharger et vérifier les 8 JPEG
+        run: |
+          set -e
+          D=instagram/carrousel-2026-10-28-6-decisions-verifiables
+          mkdir -p $D
+          B=https://d3e0luujhwn38u.cloudfront.net/original/img/original/340977
+          while read n f m; do
+            curl -sSf -o $D/$n $B/$f.jpg
+            echo "$m  $D/$n" | md5sum -c -
+          done <<'LIST'
+          01.jpg d58e8419-46a0-4726-ac2e-d727d91aa1e2 8a578650b5a00cf9695736b0f3f5bfdb
+          02.jpg ad639b1f-63ef-4827-aeab-6fb8f5865521 1482cc3aa7a276e0afa6f1fb4f5d142e
+          03.jpg b99d970b-61b8-4d81-b311-0a7e66b51151 79240345c829f8847debf99222e0b9ed
+          04.jpg 856d750f-295c-47ce-8d85-cc4931c0d25c 1565f4b5884864bdcc572e942ba61466
+          05.jpg 6d3767dc-b08c-49d7-b9b8-2585aca5ab03 a3ded3627b2ac52f120010774726934f
+          06.jpg 852634f6-eba5-4146-b6e4-52c5f44b22a9 948f185685c74459e3c203cd34e125f0
+          07.jpg 2c8f6211-c3ef-4a0f-9e83-125271872e0d 76d55ee9105c6f203c6243f7331f0b5f
+          08.jpg 31147935-7698-4036-b818-e6a2ee1a6890 19b052528212525bf66535ef9af6b3e5
+          LIST
+          git config user.name "dbr-visuel-insta-bot"
+          git config user.email "actions@github.com"
+          git add $D
+          git commit -m "Images du carrousel du 28/10 (md5 vérifiés)"
+          git push
