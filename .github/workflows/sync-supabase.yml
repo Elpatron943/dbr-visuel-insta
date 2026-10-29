@@ -29,7 +29,7 @@ jobs:
       - name: Recopier les réels depuis Supabase
         run: |
           cat > "$RUNNER_TEMP/sync.mjs" <<'NORA_EOF'
-          // Recopie dans le dépôt les réels préparés par Nora dans Supabase (fonction public.dbr_reel_queue),
+          // Recopie dans le dépôt les réels et carrousels préparés par Nora dans Supabase (fonction public.dbr_reel_queue),
           // sans aucune action manuelle : vidéo et couverture téléchargées depuis leurs URL publiques (md5 vérifié),
           // post.json mis à jour à chaque changement (validation de Max : approved true + publish_at).
           // Un dossier déjà publié (published.json) ou écarté (skipped.json) n'est plus jamais modifié.
@@ -41,7 +41,8 @@ jobs:
           const URL_RPC = "https://pxkzymnydcegwuslqtpo.supabase.co/rest/v1/rpc/dbr_reel_queue";
           // Clé publishable (publique par conception) : elle ne donne accès qu'à la fonction ci-dessus.
           const KEY = process.env.SUPABASE_PUBLISHABLE_KEY || "sb_publishable_hh_AHxESr-JaJQsXtGL2yA_xmIRbp0i";
-          const SAFE = /^reel-\d{4}-\d{2}-\d{2}-[a-z0-9-]+$/;
+          // Réels et carrousels. Les images d'un carrousel sont poussées dans le dépôt par Nora : seul post.json est recopié.
+          const SAFE = /^(reel|carrousel)-\d{4}-\d{2}-\d{2}-[a-z0-9-]+$/;
 
           const md5 = (buf) => crypto.createHash("md5").update(buf).digest("hex");
 
@@ -73,6 +74,13 @@ jobs:
             const dir = path.join("instagram", dossier);
             if (fs.existsSync(path.join(dir, "published.json")) || fs.existsSync(path.join(dir, "skipped.json"))) continue;
             try {
+              if (dossier.startsWith("carrousel-")) {
+                const manquantes = (post?.images || []).filter((f) => !fs.existsSync(path.join(dir, f)));
+                if (!post?.images?.length || manquantes.length) {
+                  console.log(`${dossier} : images absentes du dépôt (${manquantes.join(", ") || "aucune image"}), ignoré`);
+                  continue;
+                }
+              }
               fs.mkdirSync(dir, { recursive: true });
               for (const name of ["reel.mp4", "cover.jpg"]) {
                 const f = lm?.fichiers?.[name];
