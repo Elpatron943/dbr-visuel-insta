@@ -1,24 +1,24 @@
 {
- "at": "2026-10-29T11:32:55.648Z",
+ "at": "2026-10-30T11:25:44.689Z",
  "account": {
   "username": "aryanadbr",
-  "followers": 545,
-  "following": 1077,
+  "followers": 555,
+  "following": 1079,
   "media_count": 11
  },
  "last_7_days": {
-  "reach": 5577,
-  "views": 7250,
-  "accounts_engaged": 59,
-  "total_interactions": 106,
+  "reach": 7049,
+  "views": 9011,
+  "accounts_engaged": 69,
+  "total_interactions": 119,
   "follows_and_unfollows": null
  },
  "media": [
   {
-   "permalink": "https://www.instagram.com/reel/DfE40uQgo4v/",
+   "permalink": "https://www.instagram.com/reel/DfHdhhVFcyr/",
    "type": "REELS",
-   "at": "2026-10-29T11:21:56+0000",
-   "first_line": "Arrête de compter tes rendez-vous.",
+   "at": "2026-10-30T11:20:58+0000",
+   "first_line": "Ils sont très chauds. C'est presque signé.",
    "likes": 0,
    "comments": 0,
    "reach": 0,
@@ -30,14 +30,29 @@
    "ig_reels_video_view_total_time": 0
   },
   {
+   "permalink": "https://www.instagram.com/reel/DfE40uQgo4v/",
+   "type": "REELS",
+   "at": "2026-10-29T11:21:56+0000",
+   "first_line": "Arrête de compter tes rendez-vous.",
+   "likes": 1,
+   "comments": 0,
+   "reach": 122,
+   "views": 140,
+   "saved": 0,
+   "shares": 0,
+   "total_interactions": 2,
+   "ig_reels_avg_watch_time": 4836,
+   "ig_reels_video_view_total_time": 614196
+  },
+  {
    "permalink": "https://www.instagram.com/p/DfCUeZZFZXI/",
    "type": "FEED",
    "at": "2026-10-28T11:25:25+0000",
    "first_line": "Commercial B2B : qu'a décidé ton client depuis ta démo ?",
    "likes": 1,
    "comments": 0,
-   "reach": 10,
-   "views": 23,
+   "reach": 12,
+   "views": 25,
    "saved": 0,
    "shares": 0,
    "total_interactions": 1
@@ -49,13 +64,13 @@
    "first_line": "Commercial B2B : plus tu vises large, moins tu signes.",
    "likes": 2,
    "comments": 0,
-   "reach": 85,
-   "views": 108,
+   "reach": 93,
+   "views": 116,
    "saved": 0,
    "shares": 1,
    "total_interactions": 4,
-   "ig_reels_avg_watch_time": 3752,
-   "ig_reels_video_view_total_time": 348974
+   "ig_reels_avg_watch_time": 3614,
+   "ig_reels_video_view_total_time": 375872
   },
   {
    "permalink": "https://www.instagram.com/reel/De-jTg1ExFO/",
@@ -64,13 +79,13 @@
    "first_line": "Commercial B2B : ton sponsor disait oui à tout. C'était le premier indice.",
    "likes": 4,
    "comments": 0,
-   "reach": 97,
-   "views": 113,
+   "reach": 101,
+   "views": 114,
    "saved": 0,
    "shares": 0,
    "total_interactions": 4,
-   "ig_reels_avg_watch_time": 5173,
-   "ig_reels_video_view_total_time": 491518
+   "ig_reels_avg_watch_time": 5033,
+   "ig_reels_video_view_total_time": 498277
   },
   {
    "permalink": "https://www.instagram.com/reel/De-jIVQDyzy/",
@@ -79,13 +94,13 @@
    "first_line": "Commercial B2B : démonstration applaudie, POC validé, sponsor ravi. Et pas de signature.",
    "likes": 1,
    "comments": 0,
-   "reach": 55,
-   "views": 56,
+   "reach": 57,
+   "views": 58,
    "saved": 0,
    "shares": 0,
    "total_interactions": 1,
-   "ig_reels_avg_watch_time": 4057,
-   "ig_reels_video_view_total_time": 215044
+   "ig_reels_avg_watch_time": 3892,
+   "ig_reels_video_view_total_time": 221877
   },
   {
    "permalink": "https://www.instagram.com/reel/De-ivu6HVA4/",
@@ -94,13 +109,13 @@
    "first_line": "Commercial B2B : ton client te dit « c'est trop cher ». Tu réponds quoi ?",
    "likes": 2,
    "comments": 0,
-   "reach": 89,
-   "views": 100,
+   "reach": 91,
+   "views": 101,
    "saved": 1,
    "shares": 0,
    "total_interactions": 4,
-   "ig_reels_avg_watch_time": 5191,
-   "ig_reels_video_view_total_time": 493183
+   "ig_reels_avg_watch_time": 5070,
+   "ig_reels_video_view_total_time": 496941
   },
   {
    "permalink": "https://www.instagram.com/reel/De-ikKZDoq8/",
@@ -114,8 +129,8 @@
    "saved": 0,
    "shares": 0,
    "total_interactions": 0,
-   "ig_reels_avg_watch_time": 10652,
-   "ig_reels_video_view_total_time": 330233
+   "ig_reels_avg_watch_time": 10080,
+   "ig_reels_video_view_total_time": 332642
   },
   {
    "permalink": "https://www.instagram.com/reel/De-iW9IjQQi/",
@@ -124,28 +139,13 @@
    "first_line": "Commercial B2B : tu sais déjà que ton prospect ne va pas signer. Mais tu te racontes une histoire.",
    "likes": 1,
    "comments": 0,
-   "reach": 47,
+   "reach": 48,
    "views": 48,
    "saved": 0,
    "shares": 0,
    "total_interactions": 1,
-   "ig_reels_avg_watch_time": 5032,
-   "ig_reels_video_view_total_time": 226460
-  },
-  {
-   "permalink": "https://www.instagram.com/reel/De-hZkbD18R/",
-   "type": "REELS",
-   "at": "2026-10-27T00:01:43+0000",
-   "first_line": "Commercial B2B : 70 % de tes rendez-vous ne sont pas des projets. Même quand ils te disent le contraire.",
-   "likes": 0,
-   "comments": 0,
-   "reach": 33,
-   "views": 38,
-   "saved": 0,
-   "shares": 0,
-   "total_interactions": 0,
-   "ig_reels_avg_watch_time": 26028,
-   "ig_reels_video_view_total_time": 884974
+   "ig_reels_avg_watch_time": 4920,
+   "ig_reels_video_view_total_time": 231254
   },
   {
    "permalink": "https://www.instagram.com/reel/De4RYIzEmge/",
@@ -159,8 +159,8 @@
    "saved": 0,
    "shares": 0,
    "total_interactions": 6,
-   "ig_reels_avg_watch_time": 6888,
-   "ig_reels_video_view_total_time": 1067759
+   "ig_reels_avg_watch_time": 6868,
+   "ig_reels_video_view_total_time": 1071492
   },
   {
    "permalink": "https://www.instagram.com/p/DeyQgSWlrL_/",
@@ -183,7 +183,7 @@
    "likes": 10,
    "comments": 0,
    "reach": 84,
-   "views": 115,
+   "views": 116,
    "saved": 1,
    "shares": 0,
    "total_interactions": 11
