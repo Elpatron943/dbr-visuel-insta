@@ -64,6 +64,7 @@ for (const slug of dirs) {
   const at = Date.parse(pub.at);
   if (!Number.isFinite(at)) continue;
   const isReel = m.type === "reel";
+  if (isReel && m.controle_qualite !== "ok") continue; // réel sans contrôle qualité passé (règle du 30 oct. 2026) : jamais republié
   const files = isReel ? [m.video, ...(m.cover ? [m.cover] : [])] : (m.images || []);
   if (!files.length || files.some((f) => !f || !fs.existsSync(path.join(dir, f)))) continue; // médias absents : on ne peut pas republier
   originals.push({ slug, m, pub, at, isReel });
