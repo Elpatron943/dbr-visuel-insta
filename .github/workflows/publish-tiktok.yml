@@ -1,0 +1,49 @@
+name: Publier les réels validés sur TikTok
+
+# Reprend sur TikTok les réels déjà publiés sur Instagram dont le contrôle qualité a été validé
+# par le fondateur ("controle_qualite": "valide_fondateur"). Voir scripts/publish-tiktok.mjs.
+
+on:
+  schedule:
+    - cron: "7,37 * * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Essai à blanc (vérifie la connexion TikTok et affiche le prochain réel, sans rien publier)"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-tiktok
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: TikTok
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Publier le réel prêt pour TikTok
+        env:
+          TIKTOK_PUBLISH_SECRET: ${{ secrets.TIKTOK_PUBLISH_SECRET }}
+          TIKTOK_API_URL: ${{ vars.TIKTOK_API_URL }}
+          TIKTOK_MODE: ${{ vars.TIKTOK_MODE }}
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && 'true' || 'false' }}
+        run: node scripts/publish-tiktok.mjs
+      - name: Enregistrer les publications TikTok
+        if: always()
+        run: |
+          git config user.name "dbr-visuel-insta-bot"
+          git config user.email "actions@github.com"
+          for f in instagram/*/tiktok.json; do [ -f "$f" ] && git add "$f"; done
+          if ! git diff --cached --quiet; then
+            git commit -m "Publications TikTok enregistrées"
+            for i in 1 2 3 4; do git pull --rebase origin main && git push && break; sleep $((i * 5)); done
+          fi

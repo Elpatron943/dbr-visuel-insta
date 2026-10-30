@@ -4,7 +4,7 @@ Dépôt public des carrousels et réels Instagram de Daily Business Review (comp
 
 ## Structure
 - `instagram/<dossier>/` : un contenu par dossier (`post.json`, médias, puis `published.json` ou `skipped.json`).
-- `scripts/` : `story-instagram.mjs`, `publish-instagram.mjs`, `reply-keyword.mjs`, `refresh-token.mjs`, `check-connection.mjs`, `instagram-stats.mjs`.
+- `scripts/` : `story-instagram.mjs`, `publish-instagram.mjs`, `publish-tiktok.mjs`, `reply-keyword.mjs`, `refresh-token.mjs`, `check-connection.mjs`, `instagram-stats.mjs`.
 - `.github/workflows/` : une action par script, plus `sync-supabase.yml`. Les fichiers `.github/*-trigger` servent à relancer une action par un push sur main.
 - `engagement/` (état et compteurs du mot-clé), `stats/` (relevés quotidiens), `guides/<slug>/cover.png`.
 - `stories/` (une story par jour, images 9:16 des carrousels dans `frames/`), `tools/story/frame.py` (carrousel vers 9:16).
@@ -24,6 +24,7 @@ Dépôt public des carrousels et réels Instagram de Daily Business Review (comp
 - Mot-clé : toutes les 10 minutes (`reply-keyword.yml`), option « Essai à blanc » en lancement manuel. Voir le README pour le déroulé.
 - Statistiques : chaque jour à 05:17 UTC, dans `stats/`. Prolongation du jeton : le 1er et le 15 de chaque mois. Vérification de la connexion : manuelle ou par push sur `.github/check-trigger`.
 - Story du jour : `story-instagram.yml`, chaque jour à 16 h 40 UTC (rattrapages à 17 h 40, 18 h 40, 19 h 40 et 20 h 40 UTC si GitHub saute le passage, sans doublon), republie en story un contenu déjà publié (réel tel quel, carrousel converti en image 9:16 par `tools/story/frame.py`), rotation du moins récemment utilisé, une par jour. Choix tracé dans `stories/<date>/story.json`, publication dans `published.json`. Annuler un jour : `stories/<date>/skipped.json` ; tout arrêter : fichier `stories/PAUSE` ; exclure un contenu : `"no_story": true` dans son `post.json`. Lancement manuel en essai à blanc (par défaut).
+- TikTok (`publish-tiktok.yml`, environnement GitHub « TikTok », 30 oct. 2026) : à 7 et 37 de chaque heure, reprend sur TikTok un réel déjà publié sur Instagram (depuis le 31 oct.) si son `post.json` porte `"controle_qualite": "valide_fondateur"`, au moins 2 h après Instagram et au plus 7 jours, un par jour, entre 7 h et 21 h. Légende `tiktok_caption`, sinon celle d'Instagram sans le paragraphe « Commente ». Écrit `tiktok.json`. Le jeton TikTok reste sur le site (`/api/tiktok-publish` du dépôt websitedbr). Exclure un réel : `"no_tiktok": true` ; tout arrêter : fichier `tiktok/PAUSE`. Lancement manuel en essai à blanc (par défaut). Secret `TIKTOK_PUBLISH_SECRET`, variables optionnelles `TIKTOK_MODE` (`direct` ou `inbox`), `TIKTOK_API_URL`.
 - Secrets : `IG_ACCESS_TOKEN`, `IG_USER_ID`. Netlify : `IG_APP_SECRET`. Variable optionnelle : `SUPABASE_PUBLISHABLE_KEY`.
 
 ## Annuler ou suspendre
