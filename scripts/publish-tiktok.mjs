@@ -15,7 +15,10 @@ import { execFileSync } from "node:child_process";
 
 const API = process.env.TIKTOK_API_URL || "https://daily-business-review.com/api/tiktok-publish";
 const SECRET = process.env.TIKTOK_PUBLISH_SECRET;
-const MODE = process.env.TIKTOK_MODE === "inbox" ? "inbox" : "direct";
+// Mode brouillon par défaut (30 oct. 2026) : l'app TikTok n'a que video.upload. Le réel arrive dans la boîte de réception
+// de l'app TikTok et le fondateur le publie lui-même, en collant la légende écrite dans tiktok.json.
+// Passer la variable TIKTOK_MODE à "direct" quand video.publish (Direct Post) sera accordé.
+const MODE = process.env.TIKTOK_MODE === "direct" ? "direct" : "inbox";
 const DRY_RUN = process.env.DRY_RUN === "true";
 const SINCE = Date.parse("2026-10-31T00:00:00Z");
 const DELAY_HOURS = 2;
@@ -102,6 +105,7 @@ try {
   const init = await call({ action: "init", mode: MODE, video_size: buf.length, title: caption, duration_sec: duration, cover_ms: m.tiktok_cover_ms });
   // À partir d'ici TikTok a créé la publication : tiktok.json est écrit quoi qu'il arrive, pour ne jamais publier deux fois.
   const record = { mode: init.mode, publish_id: init.publish_id, status: "UPLOADING", post_id: null, approval_id: m.approval_id || null, at: new Date().toISOString() };
+  if (init.mode === "inbox") record.caption = caption; // un brouillon TikTok n'a pas de légende : à coller à la publication
   try {
     for (let i = 0; i < init.total_chunk_count; i++) {
       const start = i * init.chunk_size;
