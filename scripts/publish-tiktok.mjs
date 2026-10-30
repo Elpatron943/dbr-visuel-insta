@@ -1,7 +1,8 @@
 // Publie sur TikTok les réels DÉJÀ publiés sur Instagram, une fois le contrôle qualité validé par le fondateur.
 // Un réel part sur TikTok seulement si son dossier instagram/<dossier>/ a :
 //   - "type": "reel" et un published.json (donc approved true et garde-fous Instagram passés) ;
-//   - "controle_qualite": "valide_fondateur" dans post.json (sigles, voix et synchro des lèvres écoutés par le fondateur) ;
+//   - en publication directe seulement : "controle_qualite": "valide_fondateur" dans post.json (en mode brouillon,
+//     le fondateur relit le réel dans l'app TikTok et le publie s'il lui plaît) ;
 //   - ni tiktok.json (déjà envoyé), ni "no_tiktok": true, ni "republication_of" (une republication Instagram ne repart pas).
 // Garde-fous : au plus un réel TikTok par jour (heure de Paris), rien entre 21 h et 7 h, au moins DELAY_HOURS après
 // la publication Instagram (le temps de l'arrêter avec "no_tiktok": true), au plus MAX_LATE_DAYS après, réels publiés
@@ -60,8 +61,9 @@ for (const dir of dirs) {
   if (!m || m.type !== "reel" || !ig || m.republication_of || m.no_tiktok === true) continue;
   const at = Date.parse(ig.at);
   if (!Number.isFinite(at) || at < SINCE) continue;
-  if (m.controle_qualite !== "valide_fondateur") {
-    console.log(`::warning::${dir} : contrôle qualité non validé par le fondateur, pas de TikTok`);
+  // En mode brouillon, le fondateur relit le réel dans l'app TikTok avant de le publier : pas de validation préalable.
+  if (MODE === "direct" && m.controle_qualite !== "valide_fondateur") {
+    console.log(`::warning::${dir} : contrôle qualité non validé par le fondateur, pas de publication directe sur TikTok`);
     continue;
   }
   if (now - at < DELAY_HOURS * 36e5) continue;
