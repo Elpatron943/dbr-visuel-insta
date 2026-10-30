@@ -23,9 +23,20 @@ const MAX_LATE_DAYS = 7;
 //   (les republications suivent leurs propres règles, voir scripts/republish-instagram.mjs) ;
 // - légende refusée si elle contient un émoji, une flèche, un tiret long ou un demi-cadratin (règle de marque).
 // Un contenu retenu par un garde-fou n'est ni publié ni écarté : il attend, ou il faut corriger son post.json.
+// Contrôle qualité des réels (fondateur, 30 oct. 2026, après un « POC » mal prononcé) : un réel neuf (hors "republication_of")
+// n'est publié que si son post.json porte "controle_qualite": "ok" (posé par Nora quand tous les contrôles de voix, de
+// prononciation et de synchro sont OK, aucun point « à regarder ») et "texte_lu" (le texte exact envoyé à la voix).
+// Le texte lu est revérifié ici : aucun sigle hors du lexique validé (CRM, DAF, DSI), jamais « poc ».
 const OPEN_HOUR = 7;
 const CLOSE_HOUR = 21;
 const REPEAT_DAYS = 60;
+const SIGLES_VALIDES = new Set(["CRM", "DAF", "DSI"]);
+function siglesInterdits(texte) {
+  const t = String(texte || "");
+  const out = new Set((t.match(/\b[A-Z]{2,5}\b/g) || []).filter((m) => !SIGLES_VALIDES.has(m)));
+  if (/\bpocs?\b/i.test(t)) out.add("POC");
+  return [...out];
+}
 const FORBIDDEN = /[–—←-⇿➔-➿⬅-⬇☀-➿️]|\p{Extended_Pictographic}/u;
 
 const parisFmt = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Paris", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", hour12: false });
@@ -69,6 +80,15 @@ for (const dir of dirs) {
     held++;
     console.log(`::error::${dir} : légende avec émoji, flèche ou tiret long, à corriger avant publication`);
     continue;
+  }
+  if (m.type === "reel" && !m.republication_of) {
+    const sigles = siglesInterdits(m.texte_lu);
+    if (m.controle_qualite !== "ok" || !String(m.texte_lu || "").trim() || sigles.length) {
+      held++;
+      const why = m.controle_qualite !== "ok" ? "controle_qualite différent de \"ok\"" : !String(m.texte_lu || "").trim() ? "texte_lu absent" : `sigle non validé dans le texte lu (${sigles.join(", ")})`;
+      console.log(`::error::${dir} : contrôle qualité du réel non passé (${why}), non publié`);
+      continue;
+    }
   }
   if (!m.republication_of) {
     const line = firstLine(m.caption);

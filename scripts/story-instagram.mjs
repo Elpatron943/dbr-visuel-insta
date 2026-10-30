@@ -46,6 +46,7 @@ if (MODE === "prepare") {
     const at = Date.parse(pub.at);
     if (!Number.isFinite(at) || NOW - at < MIN_AGE_DAYS * DAY) continue;
     const isReel = m.type === "reel";
+    if (isReel && m.controle_qualite !== "ok") continue; // réel sans contrôle qualité passé (règle du 30 oct. 2026) : jamais repris en story
     const media = isReel ? m.video : (m.images || [])[0];
     if (!media || !fs.existsSync(path.join(dir, media))) continue;
     originals.push({ slug, m, pub, at, isReel, media });
