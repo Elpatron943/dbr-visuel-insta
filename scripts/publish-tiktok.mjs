@@ -9,9 +9,13 @@
 // sur Instagram depuis SINCE seulement. Tout arrêter : fichier tiktok/PAUSE.
 // Légende : "tiktok_caption" de post.json, sinon celle d'Instagram sans le paragraphe « Commente <MOT> »
 // (l'envoi automatique du guide n'existe que sur Instagram).
+// Carrousels (31 oct. 2026) : un contenu DBR part sur tous les réseaux, TikTok compris. Un carrousel publié sur Instagram
+// part donc aussi, en vidéo diaporama (4 s par image, format 9:16) fabriquée ici avec ffmpeg, ou "tiktok_video" si le
+// dossier en fournit une. Mêmes garde-fous que les réels.
 // Le jeton TikTok n'est jamais ici : la route /api/tiktok-publish du site le garde et renvoie l'adresse d'envoi.
 import fs from "node:fs";
 import path from "node:path";
+import os from "node:os";
 import { execFileSync } from "node:child_process";
 
 const API = process.env.TIKTOK_API_URL || "https://daily-business-review.com/api/tiktok-publish";
@@ -58,11 +62,13 @@ for (const dir of dirs) {
   if (fs.existsSync(path.join(dir, "tiktok.json"))) continue;
   const m = readJson(path.join(dir, "post.json"));
   const ig = readJson(path.join(dir, "published.json"));
-  if (!m || m.type !== "reel" || !ig || m.republication_of || m.no_tiktok === true) continue;
+  if (!m || !ig || m.republication_of || m.no_tiktok === true) continue;
+  const isReel = m.type === "reel";
+  if (!isReel && !(Array.isArray(m.images) && m.images.length)) continue;
   const at = Date.parse(ig.at);
   if (!Number.isFinite(at) || at < SINCE) continue;
   // En mode brouillon, le fondateur relit le réel dans l'app TikTok avant de le publier : pas de validation préalable.
-  if (MODE === "direct" && m.controle_qualite !== "valide_fondateur") {
+  if (MODE === "direct" && isReel && m.controle_qualite !== "valide_fondateur") {
     console.log(`::warning::${dir} : contrôle qualité non validé par le fondateur, pas de publication directe sur TikTok`);
     continue;
   }
@@ -73,11 +79,26 @@ for (const dir of dirs) {
     console.log(`::error::${dir} : légende TikTok vide, trop longue ou avec émoji, flèche ou tiret long`);
     continue;
   }
-  const video = path.join(dir, String(m.video || ""));
-  if (!/\.mp4$/i.test(video) || !fs.existsSync(video)) { console.log(`::error::${dir} : vidéo manquante`); continue; }
-  due.push({ dir, m, at, caption, video });
+  const video = path.join(dir, String((isReel ? m.video : m.tiktok_video) || ""));
+  const hasVideo = /\.mp4$/i.test(video) && fs.existsSync(video);
+  if (isReel && !hasVideo) { console.log(`::error::${dir} : vidéo manquante`); continue; }
+  if (!isReel && !hasVideo && !m.images.every((f) => fs.existsSync(path.join(dir, f)))) { console.log(`::error::${dir} : image du carrousel manquante`); continue; }
+  due.push({ dir, m, at, caption, video: hasVideo ? video : null });
 }
 due.sort((a, b) => a.at - b.at);
+
+// Diaporama 9:16 d'un carrousel : chaque image 1080 x 1350 centrée sur le fond DBR, 4 s par image.
+export function slideshow(dir, images) {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "tiktok-"));
+  const list = path.join(tmp, "list.txt");
+  const abs = images.map((f) => path.resolve(dir, f).replace(/'/g, "'\\''"));
+  fs.writeFileSync(list, abs.map((f) => `file '${f}'\nduration 4`).join("\n") + `\nfile '${abs[abs.length - 1]}'\n`);
+  const out = path.join(tmp, "diaporama.mp4");
+  execFileSync("ffmpeg", ["-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", list,
+    "-vf", "scale=1080:1350:force_original_aspect_ratio=decrease,pad=1080:1920:(ow-iw)/2:(oh-ih)/2:color=0x0A0A0D,fps=30,format=yuv420p",
+    "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-movflags", "+faststart", out], { stdio: "inherit" });
+  return out;
+}
 
 async function call(body) {
   const r = await fetch(API, { method: "POST", headers: { Authorization: `Bearer ${SECRET}`, "Content-Type": "application/json" }, body: JSON.stringify(body) });
@@ -92,15 +113,16 @@ if (!SECRET && (DRY_RUN || due.length)) { console.error("::error::Secret TIKTOK_
 if (DRY_RUN) {
   const c = await call({ action: "check" });
   console.log(`Essai à blanc. Compte TikTok : ${c.account}, droits : ${c.scope}, publication directe : ${c.direct_post ? "oui" : "non"}, confidentialité visée : ${c.privacy_level} (possibles : ${c.privacy_level_options.join(", ") || "aucune"}).`);
-  console.log(due.length ? `Serait publié : ${due[0].dir}\n--- légende ---\n${due[0].caption}` : "Aucun réel à publier maintenant.");
+  console.log(due.length ? `Serait publié : ${due[0].dir}${due[0].video ? "" : " (carrousel, en diaporama)"}\n--- légende ---\n${due[0].caption}` : "Aucun réel à publier maintenant.");
   process.exit(0);
 }
 if (!due.length) { console.log("Aucun réel à publier sur TikTok maintenant."); process.exit(0); }
 if (today.hour < OPEN_HOUR || today.hour >= CLOSE_HOUR) { console.log(`Il est ${today.hour} h à Paris : pas de publication TikTok avant ${OPEN_HOUR} h ni après ${CLOSE_HOUR} h.`); process.exit(0); }
 if (sentToday) { console.log(`Déjà un réel TikTok aujourd'hui : ${due.length} réel(s) attendent demain.`); process.exit(0); }
 
-const { dir, m, caption, video } = due[0]; // une seule publication par passage
+const { dir, m, caption } = due[0]; // une seule publication par passage
 try {
+  const video = due[0].video || slideshow(dir, m.images);
   const buf = fs.readFileSync(video);
   let duration;
   try { duration = Math.ceil(Number(execFileSync("ffprobe", ["-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", video], { stdio: ["ignore", "pipe", "ignore"] }).toString().trim())); } catch {}
