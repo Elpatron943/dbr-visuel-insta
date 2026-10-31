@@ -1,7 +1,7 @@
-name: Publier les réels validés sur TikTok
+name: Publier les réels et carrousels sur TikTok
 
-# Reprend sur TikTok les réels déjà publiés sur Instagram dont le contrôle qualité a été validé
-# par le fondateur ("controle_qualite": "valide_fondateur"). Voir scripts/publish-tiktok.mjs.
+# Reprend sur TikTok les réels et les carrousels (en diaporama) déjà publiés sur Instagram,
+# en brouillon dans l'app TikTok par défaut. Voir scripts/publish-tiktok.mjs.
 
 on:
   schedule:
@@ -30,7 +30,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Publier le réel prêt pour TikTok
+      - name: Installer ffmpeg (diaporama des carrousels)
+        run: command -v ffmpeg >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
+      - name: Publier le contenu prêt pour TikTok
         env:
           TIKTOK_PUBLISH_SECRET: ${{ secrets.TIKTOK_PUBLISH_SECRET }}
           TIKTOK_API_URL: ${{ vars.TIKTOK_API_URL }}
