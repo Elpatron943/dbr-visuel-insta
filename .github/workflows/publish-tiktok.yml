@@ -1,6 +1,6 @@
 name: Publier les réels et carrousels sur TikTok
 
-# Reprend sur TikTok les réels et les carrousels (en diaporama) déjà publiés sur Instagram,
+# Reprend sur TikTok les réels et les carrousels (en mode photo) déjà publiés sur Instagram,
 # en brouillon dans l'app TikTok par défaut. Voir scripts/publish-tiktok.mjs.
 
 on:
@@ -30,7 +30,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Installer ffmpeg (diaporama des carrousels)
+      - name: Installer ffmpeg (durée des réels)
         run: command -v ffmpeg >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
       - name: Publier le contenu prêt pour TikTok
         env:

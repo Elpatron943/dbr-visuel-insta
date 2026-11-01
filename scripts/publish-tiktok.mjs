@@ -10,12 +10,13 @@
 // Légende : "tiktok_caption" de post.json, sinon celle d'Instagram sans le paragraphe « Commente <MOT> »
 // (l'envoi automatique du guide n'existe que sur Instagram).
 // Carrousels (31 oct. 2026) : un contenu DBR part sur tous les réseaux, TikTok compris. Un carrousel publié sur Instagram
-// part donc aussi, en vidéo diaporama (4 s par image, format 9:16) fabriquée ici avec ffmpeg, ou "tiktok_video" si le
-// dossier en fournit une. Mêmes garde-fous que les réels.
+// part donc aussi, en mode photo (1er nov. 2026 : carrousel natif TikTok, on fait défiler les images ; plus de vidéo
+// diaporama), ou en vidéo si le dossier fournit "tiktok_video". TikTok télécharge lui-même les images depuis
+// https://daily-business-review.com/tiktok-media/<dossier>/<NN>.jpg (route du site, préfixe vérifié dans le portail
+// développeur TikTok). Images nommées 01.jpg à 35.jpg. Mêmes garde-fous que les réels.
 // Le jeton TikTok n'est jamais ici : la route /api/tiktok-publish du site le garde et renvoie l'adresse d'envoi.
 import fs from "node:fs";
 import path from "node:path";
-import os from "node:os";
 import { execFileSync } from "node:child_process";
 
 const API = process.env.TIKTOK_API_URL || "https://daily-business-review.com/api/tiktok-publish";
@@ -82,23 +83,13 @@ for (const dir of dirs) {
   const video = path.join(dir, String((isReel ? m.video : m.tiktok_video) || ""));
   const hasVideo = /\.mp4$/i.test(video) && fs.existsSync(video);
   if (isReel && !hasVideo) { console.log(`::error::${dir} : vidéo manquante`); continue; }
-  if (!isReel && !hasVideo && !m.images.every((f) => fs.existsSync(path.join(dir, f)))) { console.log(`::error::${dir} : image du carrousel manquante`); continue; }
+  if (!isReel && !hasVideo && !m.images.every((f) => /^[0-9]{2}\.jpe?g$/i.test(f) && fs.existsSync(path.join(dir, f)))) {
+    console.log(`::error::${dir} : image du carrousel manquante ou mal nommée (01.jpg à 35.jpg attendus)`);
+    continue;
+  }
   due.push({ dir, m, at, caption, video: hasVideo ? video : null });
 }
 due.sort((a, b) => a.at - b.at);
-
-// Diaporama 9:16 d'un carrousel : chaque image 1080 x 1350 centrée sur le fond DBR, 4 s par image.
-export function slideshow(dir, images) {
-  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "tiktok-"));
-  const list = path.join(tmp, "list.txt");
-  const abs = images.map((f) => path.resolve(dir, f).replace(/'/g, "'\\''"));
-  fs.writeFileSync(list, abs.map((f) => `file '${f}'\nduration 4`).join("\n") + `\nfile '${abs[abs.length - 1]}'\n`);
-  const out = path.join(tmp, "diaporama.mp4");
-  execFileSync("ffmpeg", ["-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", list,
-    "-vf", "scale=1080:1350:force_original_aspect_ratio=decrease,pad=1080:1920:(ow-iw)/2:(oh-ih)/2:color=0x0A0A0D,fps=30,format=yuv420p",
-    "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-movflags", "+faststart", out], { stdio: "inherit" });
-  return out;
-}
 
 async function call(body) {
   const r = await fetch(API, { method: "POST", headers: { Authorization: `Bearer ${SECRET}`, "Content-Type": "application/json" }, body: JSON.stringify(body) });
@@ -113,7 +104,7 @@ if (!SECRET && (DRY_RUN || due.length)) { console.error("::error::Secret TIKTOK_
 if (DRY_RUN) {
   const c = await call({ action: "check" });
   console.log(`Essai à blanc. Compte TikTok : ${c.account}, droits : ${c.scope}, publication directe : ${c.direct_post ? "oui" : "non"}, confidentialité visée : ${c.privacy_level} (possibles : ${c.privacy_level_options.join(", ") || "aucune"}).`);
-  console.log(due.length ? `Serait publié : ${due[0].dir}${due[0].video ? "" : " (carrousel, en diaporama)"}\n--- légende ---\n${due[0].caption}` : "Aucun réel à publier maintenant.");
+  console.log(due.length ? `Serait publié : ${due[0].dir}${due[0].video ? "" : " (carrousel, en mode photo)"}\n--- légende ---\n${due[0].caption}` : "Aucun réel à publier maintenant.");
   process.exit(0);
 }
 if (!due.length) { console.log("Aucun réel à publier sur TikTok maintenant."); process.exit(0); }
@@ -121,8 +112,40 @@ if (today.hour < OPEN_HOUR || today.hour >= CLOSE_HOUR) { console.log(`Il est ${
 if (sentToday) { console.log(`Déjà un réel TikTok aujourd'hui : ${due.length} réel(s) attendent demain.`); process.exit(0); }
 
 const { dir, m, caption } = due[0]; // une seule publication par passage
+
+// Carrousel en mode photo : TikTok télécharge les images, rien à pousser d'ici.
+async function sendPhotos() {
+  const images = m.images.map((f) => `${path.basename(dir)}/${f}`);
+  const title = caption.split("\n")[0].trim();
+  const init = await call({ action: "init_photo", mode: MODE, images, title, description: caption });
+  const record = { mode: init.mode, media: "photo", publish_id: init.publish_id, status: "PROCESSING_DOWNLOAD", post_id: null, approval_id: m.approval_id || null, at: new Date().toISOString() };
+  if (init.mode === "inbox") record.caption = caption;
+  try {
+    const final = init.mode === "inbox" ? ["SEND_TO_USER_INBOX", "PUBLISH_COMPLETE"] : ["PUBLISH_COMPLETE"];
+    for (let i = 0; i < 60; i++) {
+      await sleep(5000);
+      const s = await call({ action: "status", publish_id: init.publish_id });
+      record.status = s.status;
+      if (s.publicaly_available_post_id?.length) record.post_id = String(s.publicaly_available_post_id[0]);
+      if (s.status === "FAILED") throw new Error(`TikTok a refusé les images : ${s.fail_reason || "raison inconnue"}`);
+      if (final.includes(s.status) && (init.mode === "inbox" || record.post_id || i > 10)) break;
+    }
+  } catch (e) {
+    record.error = e.message;
+    throw e;
+  } finally {
+    fs.writeFileSync(path.join(dir, "tiktok.json"), JSON.stringify(record, null, 1));
+  }
+  console.log(`${dir} : carrousel ${init.mode === "inbox" ? "envoyé en brouillon TikTok" : "publié sur TikTok"} en mode photo (statut ${record.status})`);
+}
+
+if (!due[0].video) {
+  try { await sendPhotos(); } catch (e) { console.error(`::error::${dir} : ÉCHEC TikTok (photos), ${e.message}`); process.exit(1); }
+  process.exit(0);
+}
+
 try {
-  const video = due[0].video || slideshow(dir, m.images);
+  const video = due[0].video;
   const buf = fs.readFileSync(video);
   let duration;
   try { duration = Math.ceil(Number(execFileSync("ffprobe", ["-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", video], { stdio: ["ignore", "pipe", "ignore"] }).toString().trim())); } catch {}
