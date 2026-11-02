@@ -90,12 +90,15 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         ev.append(f"Dialogue: 3,{ass_t(t0)},{ass_t(dur)},KwTop,,0,0,0,,{{\\an5\\pos(540,1150)\\fad(150,0)}}COMMENTE")
         ev.append(f"Dialogue: 3,{ass_t(t0)},{ass_t(dur)},Kw,,0,0,0,,{{\\an5\\pos(540,1310)\\fs{size}\\fad(120,0)\\fscx70\\fscy70\\t(0,220,\\fscx108\\fscy108)\\t(220,380,\\fscx100\\fscy100)}}{kw}")
         ev.append(f"Dialogue: 3,{ass_t(t0+0.25)},{ass_t(dur)},KwSub,,0,0,0,,{{\\an5\\pos(540,1460)\\fad(200,0)}}abonne-toi · guide complet en message privé")
-    for g in groups(words):
+    gs = groups(words)
+    for gi, g in enumerate(gs):
         if keyword and g[0][1] >= dur - end_card:
             continue  # pas de sous-titres pendant le carton final
         g_end = g[-1][2]
+        # début du groupe suivant : le dernier mot ne doit pas chevaucher le groupe d'après
+        g_next = gs[gi + 1][0][1] if gi + 1 < len(gs) else dur
         for i, (w, a, z) in enumerate(g):
-            end = g[i + 1][1] if i + 1 < len(g) else g_end + 0.12
+            end = g[i + 1][1] if i + 1 < len(g) else min(g_end + 0.12, g_next - 0.01)
             parts = []
             for j, (wj, _, _) in enumerate(g):
                 txt = wj.upper()
