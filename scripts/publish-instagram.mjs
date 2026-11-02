@@ -18,7 +18,8 @@ const MAX_LATE_DAYS = 7;
 
 // Garde-fous de diffusion (audit réseaux du 28 oct. 2026) :
 // - au plus une publication par jour (heure de Paris), sauf "hors_quota": true dans post.json ;
-// - jamais la nuit : publication seulement entre OPEN_HOUR et CLOSE_HOUR (heure de Paris), sinon on attend le prochain passage ;
+// - jamais la nuit : publication seulement entre OPEN_HOUR et CLOSE_HOUR (heure de Paris), sinon on attend le prochain passage
+//   (exception décidée par le fondateur pour un contenu précis : "hors_horaire": true dans post.json) ;
 // - pas deux fois le même sujet (même première ligne de légende) en moins de REPEAT_DAYS jours, hors "republication_of"
 //   (les republications suivent leurs propres règles, voir scripts/republish-instagram.mjs) ;
 // - légende refusée si elle contient un émoji, une flèche, un tiret long ou un demi-cadratin (règle de marque).
@@ -103,7 +104,10 @@ for (const dir of dirs) {
 }
 if (!due.length) { console.log("Aucun carrousel validé à publier maintenant."); process.exit(0); }
 const forced = due.filter(({ m }) => m.hors_quota === true);
-if (nightTime) { console.log(`Il est ${today.hour} h à Paris : aucune publication avant ${OPEN_HOUR} h ni après ${CLOSE_HOUR} h, ${due.length} contenu(s) en attente.`); process.exit(0); }
+// Exception de nuit décidée par le fondateur pour un contenu précis : "hors_horaire": true dans post.json.
+const nightForced = due.filter(({ m }) => m.hors_horaire === true);
+if (nightTime && !nightForced.length) { console.log(`Il est ${today.hour} h à Paris : aucune publication avant ${OPEN_HOUR} h ni après ${CLOSE_HOUR} h, ${due.length} contenu(s) en attente. Exception possible avec "hors_horaire": true.`); process.exit(0); }
+if (nightTime) due.splice(0, due.length, ...nightForced);
 if (publishedToday && !forced.length) { console.log(`Déjà une publication aujourd'hui (heure de Paris) : ${due.length} contenu(s) attendent demain. Exception possible avec "hors_quota": true.`); process.exit(0); }
 if (publishedToday) due.splice(0, due.length, ...forced);
 if (!TOKEN || !IG_ID) { console.error("::error::Secrets IG_ACCESS_TOKEN et IG_USER_ID requis (Settings → Secrets and variables → Actions)."); process.exit(1); }
