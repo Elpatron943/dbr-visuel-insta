@@ -73,7 +73,9 @@ for (const dir of dirs) {
     console.log(`::warning::${dir} : contrôle qualité non validé par le fondateur, pas de publication directe sur TikTok`);
     continue;
   }
-  if (now - at < DELAY_HOURS * 36e5) continue;
+  // Exception décidée par le fondateur pour un contenu précis : "hors_horaire": true lève le délai, la nuit et le quota du jour.
+  const force = m.hors_horaire === true;
+  if (!force && now - at < DELAY_HOURS * 36e5) continue;
   if (now - at > MAX_LATE_DAYS * 864e5) { console.log(`${dir} : publié sur Instagram il y a plus de ${MAX_LATE_DAYS} jours, ignoré`); continue; }
   const caption = tiktokCaption(m);
   if (!caption || caption.length > 2200 || FORBIDDEN.test(caption)) {
@@ -87,9 +89,9 @@ for (const dir of dirs) {
     console.log(`::error::${dir} : image du carrousel manquante ou mal nommée (01.jpg à 35.jpg attendus)`);
     continue;
   }
-  due.push({ dir, m, at, caption, video: hasVideo ? video : null });
+  due.push({ dir, m, at, force, caption, video: hasVideo ? video : null });
 }
-due.sort((a, b) => a.at - b.at);
+due.sort((a, b) => (b.force - a.force) || (a.at - b.at));
 
 async function call(body) {
   const r = await fetch(API, { method: "POST", headers: { Authorization: `Bearer ${SECRET}`, "Content-Type": "application/json" }, body: JSON.stringify(body) });
@@ -108,8 +110,8 @@ if (DRY_RUN) {
   process.exit(0);
 }
 if (!due.length) { console.log("Aucun réel à publier sur TikTok maintenant."); process.exit(0); }
-if (today.hour < OPEN_HOUR || today.hour >= CLOSE_HOUR) { console.log(`Il est ${today.hour} h à Paris : pas de publication TikTok avant ${OPEN_HOUR} h ni après ${CLOSE_HOUR} h.`); process.exit(0); }
-if (sentToday) { console.log(`Déjà un réel TikTok aujourd'hui : ${due.length} réel(s) attendent demain.`); process.exit(0); }
+if (!due[0].force && (today.hour < OPEN_HOUR || today.hour >= CLOSE_HOUR)) { console.log(`Il est ${today.hour} h à Paris : pas de publication TikTok avant ${OPEN_HOUR} h ni après ${CLOSE_HOUR} h.`); process.exit(0); }
+if (!due[0].force && sentToday) { console.log(`Déjà un réel TikTok aujourd'hui : ${due.length} réel(s) attendent demain.`); process.exit(0); }
 
 const { dir, m, caption } = due[0]; // une seule publication par passage
 
