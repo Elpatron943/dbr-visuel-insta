@@ -1,16 +1,16 @@
 {
- "at": "2026-11-03T12:50:17.105Z",
+ "at": "2026-11-04T13:00:34.233Z",
  "account": {
   "username": "aryanadbr",
-  "followers": 570,
-  "following": 1079,
+  "followers": 568,
+  "following": 1081,
   "media_count": 10
  },
  "last_7_days": {
-  "reach": 4991,
-  "views": 6211,
-  "accounts_engaged": 40,
-  "total_interactions": 71,
+  "reach": 4315,
+  "views": 5364,
+  "accounts_engaged": 36,
+  "total_interactions": 64,
   "follows_and_unfollows": null
  },
  "media": [
@@ -19,15 +19,15 @@
    "type": "REELS",
    "at": "2026-11-03T11:21:01+0000",
    "first_line": "Rappelez-moi la semaine prochaine.",
-   "likes": 0,
+   "likes": 1,
    "comments": 0,
-   "reach": 7,
-   "views": 14,
+   "reach": 107,
+   "views": 118,
    "saved": 0,
    "shares": 0,
-   "total_interactions": 0,
-   "ig_reels_avg_watch_time": 3361,
-   "ig_reels_video_view_total_time": 20166
+   "total_interactions": 1,
+   "ig_reels_avg_watch_time": 7417,
+   "ig_reels_video_view_total_time": 830791
   },
   {
    "permalink": "https://www.instagram.com/reel/DfQSn8ImT9t/",
@@ -36,13 +36,13 @@
    "first_line": "Ta prévision du trimestre, tu la construis comment ?",
    "likes": 1,
    "comments": 0,
-   "reach": 24,
-   "views": 27,
+   "reach": 28,
+   "views": 30,
    "saved": 0,
    "shares": 0,
    "total_interactions": 1,
-   "ig_reels_avg_watch_time": 6275,
-   "ig_reels_video_view_total_time": 175715
+   "ig_reels_avg_watch_time": 5634,
+   "ig_reels_video_view_total_time": 180302
   },
   {
    "permalink": "https://www.instagram.com/p/DfKvge0GsUh/",
@@ -51,8 +51,8 @@
    "first_line": "Ton deal n'est pas en retard. Il est mal classé.",
    "likes": 4,
    "comments": 1,
-   "reach": 11,
-   "views": 29,
+   "reach": 13,
+   "views": 32,
    "saved": 0,
    "shares": 0,
    "total_interactions": 6
@@ -64,13 +64,13 @@
    "first_line": "Arrête de compter tes rendez-vous.",
    "likes": 3,
    "comments": 0,
-   "reach": 134,
-   "views": 156,
+   "reach": 138,
+   "views": 160,
    "saved": 0,
    "shares": 0,
    "total_interactions": 4,
-   "ig_reels_avg_watch_time": 5047,
-   "ig_reels_video_view_total_time": 752135
+   "ig_reels_avg_watch_time": 5072,
+   "ig_reels_video_view_total_time": 781217
   },
   {
    "permalink": "https://www.instagram.com/p/DfCUeZZFZXI/",
@@ -79,8 +79,8 @@
    "first_line": "Commercial B2B : qu'a décidé ton client depuis ta démo ?",
    "likes": 3,
    "comments": 0,
-   "reach": 20,
-   "views": 37,
+   "reach": 22,
+   "views": 39,
    "saved": 0,
    "shares": 0,
    "total_interactions": 3
@@ -92,13 +92,13 @@
    "first_line": "Commercial B2B : plus tu vises large, moins tu signes.",
    "likes": 4,
    "comments": 0,
-   "reach": 105,
-   "views": 125,
+   "reach": 107,
+   "views": 127,
    "saved": 1,
    "shares": 1,
    "total_interactions": 7,
-   "ig_reels_avg_watch_time": 3912,
-   "ig_reels_video_view_total_time": 453894
+   "ig_reels_avg_watch_time": 3930,
+   "ig_reels_video_view_total_time": 463783
   },
   {
    "permalink": "https://www.instagram.com/reel/De-ivu6HVA4/",
@@ -107,13 +107,13 @@
    "first_line": "Commercial B2B : ton client te dit « c'est trop cher ». Tu réponds quoi ?",
    "likes": 3,
    "comments": 0,
-   "reach": 100,
-   "views": 106,
+   "reach": 101,
+   "views": 108,
    "saved": 1,
    "shares": 0,
    "total_interactions": 5,
-   "ig_reels_avg_watch_time": 5397,
-   "ig_reels_video_view_total_time": 561331
+   "ig_reels_avg_watch_time": 5337,
+   "ig_reels_video_view_total_time": 565753
   },
   {
    "permalink": "https://www.instagram.com/reel/De-iW9IjQQi/",
@@ -122,13 +122,13 @@
    "first_line": "Commercial B2B : tu sais déjà que ton prospect ne va pas signer. Mais tu te racontes une histoire.",
    "likes": 1,
    "comments": 0,
-   "reach": 57,
-   "views": 62,
+   "reach": 59,
+   "views": 64,
    "saved": 1,
    "shares": 0,
    "total_interactions": 2,
-   "ig_reels_avg_watch_time": 5222,
-   "ig_reels_video_view_total_time": 292450
+   "ig_reels_avg_watch_time": 5097,
+   "ig_reels_video_view_total_time": 295628
   },
   {
    "permalink": "https://www.instagram.com/reel/De4RYIzEmge/",
