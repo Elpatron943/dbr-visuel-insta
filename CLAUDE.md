@@ -35,6 +35,7 @@ Dépôt public des carrousels et réels Instagram de Daily Business Review (comp
 - Après publication, `published.json` empêche toute republication ; la suppression du post se fait à la main dans Instagram.
 
 ## Règles
+- Publication manuelle (consigne du fondateur, 7 nov. 2026) : plus aucun réel ni carrousel n'est publié automatiquement, sur aucun réseau. Les fichiers `instagram/PAUSE`, `stories/PAUSE`, `tiktok/PAUSE` et `republication/PAUSE` bloquent les actions de publication (la synchronisation Supabase continue de recopier les dossiers). Quand un contenu est prêt, Nora prévient le fondateur dans le projet et lui remet la vidéo ou les images avec les légendes ; il publie lui-même sur Instagram, TikTok, LinkedIn et X. Ne supprimer un fichier PAUSE que sur sa demande.
 - Un contenu DBR est publié sur quatre réseaux : Instagram @aryanadbr, X @Aryanadbr, LinkedIn ET TikTok. Jamais sur Instagram seul. TikTok n'est jamais oublié : même quand il n'arrive qu'en brouillon dans l'app TikTok, il est envoyé et figure dans toute liste de diffusion (consigne du fondateur, 31 oct. 2026).
 - Pas de tiret long ni de demi-cadratin, pas de flèche, pas d'emoji. Écrire « pipeline », jamais « pipe ».
 - Rien n'est publié sans `approved: true` posé par le fondateur.
