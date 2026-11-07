@@ -45,3 +45,12 @@ Dépôt public des carrousels et réels Instagram de Daily Business Review (comp
 - `node --check scripts/*.mjs connect/netlify/functions/*.mjs`
 - `python3 -m py_compile tools/couverture/couverture.py tools/habillage/habiller.py`
 - Validité JSON des `post.json` et des fichiers YAML des workflows.
+
+## graphify
+
+Graphe de connaissances du code, construit en local par `./scripts/graphify.sh` (extraction locale, sans IA ni tokens) dans `graphify-out/`.
+
+- En début de session, avant toute question sur le code ou toute modification, lancer `./scripts/graphify.sh`.
+- Pour trouver où vit une fonctionnalité, interroger d'abord le graphe (`graphify query "…"`, `graphify explain "…"`, `graphify path "A" "B"`), puis lire seulement les fichiers qu'il désigne.
+- Après avoir modifié du code, relancer `./scripts/graphify.sh`.
+- Ne jamais commiter `graphify-out/` (il est dans `.gitignore`).
