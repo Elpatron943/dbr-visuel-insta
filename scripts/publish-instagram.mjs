@@ -9,6 +9,13 @@
 import fs from "node:fs";
 import path from "node:path";
 
+// Publication manuelle (fondateur, 7 nov. 2026) : plus rien ne part seul. Le fondateur publie lui-même sur Instagram,
+// TikTok, LinkedIn et X les fichiers qu'on lui remet. Tant que instagram/PAUSE existe, ce script ne publie rien.
+if (fs.existsSync(path.join("instagram", "PAUSE"))) {
+  console.log("instagram/PAUSE présent : aucune publication automatique (publication manuelle par le fondateur).");
+  process.exit(0);
+}
+
 const TOKEN = process.env.IG_ACCESS_TOKEN;
 const IG_ID = process.env.IG_USER_ID;
 const HOST = process.env.IG_GRAPH_HOST || "https://graph.instagram.com";
