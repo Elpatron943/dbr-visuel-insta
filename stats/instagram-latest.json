@@ -1,16 +1,16 @@
 {
- "at": "2026-11-07T11:45:22.849Z",
+ "at": "2026-11-08T11:57:48.048Z",
  "account": {
   "username": "aryanadbr",
-  "followers": 572,
+  "followers": 573,
   "following": 1084,
   "media_count": 13
  },
  "last_7_days": {
-  "reach": 317,
-  "views": 580,
-  "accounts_engaged": 20,
-  "total_interactions": 37,
+  "reach": 408,
+  "views": 731,
+  "accounts_engaged": 19,
+  "total_interactions": 36,
   "follows_and_unfollows": null
  },
  "media": [
@@ -19,58 +19,58 @@
    "type": "REELS",
    "at": "2026-11-07T11:21:28+0000",
    "first_line": "On n'a pas de budget cette année.",
-   "likes": 0,
+   "likes": 2,
    "comments": 0,
-   "reach": 1,
-   "views": 6,
+   "reach": 119,
+   "views": 140,
    "saved": 0,
    "shares": 0,
-   "total_interactions": 1,
-   "ig_reels_avg_watch_time": 12766,
-   "ig_reels_video_view_total_time": 12766
+   "total_interactions": 3,
+   "ig_reels_avg_watch_time": 5353,
+   "ig_reels_video_view_total_time": 631753
   },
   {
    "permalink": "https://www.instagram.com/reel/DfaIWxCj6nO/",
    "type": "REELS",
    "at": "2026-11-06T17:21:35+0000",
    "first_line": "Votre concurrent est moins cher.",
-   "likes": 0,
+   "likes": 1,
    "comments": 0,
-   "reach": 82,
-   "views": 87,
+   "reach": 91,
+   "views": 96,
    "saved": 0,
    "shares": 0,
-   "total_interactions": 0,
-   "ig_reels_avg_watch_time": 3625,
-   "ig_reels_video_view_total_time": 308187
+   "total_interactions": 1,
+   "ig_reels_avg_watch_time": 3863,
+   "ig_reels_video_view_total_time": 359267
   },
   {
    "permalink": "https://www.instagram.com/p/DfVCnc1iWlz/",
    "type": "FEED",
    "at": "2026-11-04T17:54:57+0000",
    "first_line": "Ce que dit ton client n'arrive jamais intact au forecast.",
-   "likes": 2,
+   "likes": 3,
    "comments": 1,
-   "reach": 17,
-   "views": 38,
+   "reach": 24,
+   "views": 50,
    "saved": 0,
    "shares": 0,
-   "total_interactions": 3
+   "total_interactions": 4
   },
   {
    "permalink": "https://www.instagram.com/reel/DfRwtIGlZB9/",
    "type": "REELS",
    "at": "2026-11-03T11:21:01+0000",
    "first_line": "Rappelez-moi la semaine prochaine.",
-   "likes": 2,
+   "likes": 3,
    "comments": 0,
-   "reach": 122,
-   "views": 134,
+   "reach": 127,
+   "views": 143,
    "saved": 1,
    "shares": 0,
-   "total_interactions": 3,
-   "ig_reels_avg_watch_time": 7044,
-   "ig_reels_video_view_total_time": 915763
+   "total_interactions": 4,
+   "ig_reels_avg_watch_time": 7272,
+   "ig_reels_video_view_total_time": 989108
   },
   {
    "permalink": "https://www.instagram.com/reel/DfQSn8ImT9t/",
@@ -79,13 +79,13 @@
    "first_line": "Ta prévision du trimestre, tu la construis comment ?",
    "likes": 2,
    "comments": 0,
-   "reach": 39,
-   "views": 43,
+   "reach": 44,
+   "views": 51,
    "saved": 0,
    "shares": 0,
    "total_interactions": 2,
-   "ig_reels_avg_watch_time": 5007,
-   "ig_reels_video_view_total_time": 230352
+   "ig_reels_avg_watch_time": 4901,
+   "ig_reels_video_view_total_time": 249986
   },
   {
    "permalink": "https://www.instagram.com/p/DfKvge0GsUh/",
@@ -94,8 +94,8 @@
    "first_line": "Ton deal n'est pas en retard. Il est mal classé.",
    "likes": 4,
    "comments": 1,
-   "reach": 15,
-   "views": 34,
+   "reach": 18,
+   "views": 39,
    "saved": 0,
    "shares": 0,
    "total_interactions": 6
@@ -107,13 +107,13 @@
    "first_line": "Arrête de compter tes rendez-vous.",
    "likes": 3,
    "comments": 0,
-   "reach": 142,
-   "views": 164,
+   "reach": 146,
+   "views": 169,
    "saved": 0,
    "shares": 0,
    "total_interactions": 4,
-   "ig_reels_avg_watch_time": 5003,
-   "ig_reels_video_view_total_time": 795509
+   "ig_reels_avg_watch_time": 4985,
+   "ig_reels_video_view_total_time": 812609
   },
   {
    "permalink": "https://www.instagram.com/p/DfCUeZZFZXI/",
@@ -122,8 +122,8 @@
    "first_line": "Commercial B2B : qu'a décidé ton client depuis ta démo ?",
    "likes": 3,
    "comments": 0,
-   "reach": 24,
-   "views": 44,
+   "reach": 27,
+   "views": 48,
    "saved": 0,
    "shares": 0,
    "total_interactions": 3
@@ -135,13 +135,13 @@
    "first_line": "Commercial B2B : plus tu vises large, moins tu signes.",
    "likes": 5,
    "comments": 0,
-   "reach": 114,
-   "views": 134,
+   "reach": 117,
+   "views": 139,
    "saved": 2,
    "shares": 1,
    "total_interactions": 9,
-   "ig_reels_avg_watch_time": 4083,
-   "ig_reels_video_view_total_time": 506371
+   "ig_reels_avg_watch_time": 4157,
+   "ig_reels_video_view_total_time": 527957
   },
   {
    "permalink": "https://www.instagram.com/reel/De-ivu6HVA4/",
@@ -150,13 +150,13 @@
    "first_line": "Commercial B2B : ton client te dit « c'est trop cher ». Tu réponds quoi ?",
    "likes": 5,
    "comments": 0,
-   "reach": 107,
-   "views": 114,
+   "reach": 110,
+   "views": 117,
    "saved": 1,
    "shares": 0,
    "total_interactions": 7,
-   "ig_reels_avg_watch_time": 5175,
-   "ig_reels_video_view_total_time": 584806
+   "ig_reels_avg_watch_time": 5107,
+   "ig_reels_video_view_total_time": 587347
   },
   {
    "permalink": "https://www.instagram.com/reel/De-iW9IjQQi/",
@@ -165,13 +165,13 @@
    "first_line": "Commercial B2B : tu sais déjà que ton prospect ne va pas signer. Mais tu te racontes une histoire.",
    "likes": 2,
    "comments": 0,
-   "reach": 61,
-   "views": 67,
+   "reach": 63,
+   "views": 69,
    "saved": 1,
    "shares": 0,
    "total_interactions": 3,
-   "ig_reels_avg_watch_time": 5251,
-   "ig_reels_video_view_total_time": 320312
+   "ig_reels_avg_watch_time": 5198,
+   "ig_reels_video_view_total_time": 322285
   },
   {
    "permalink": "https://www.instagram.com/reel/De4RYIzEmge/",
@@ -195,8 +195,8 @@
    "first_line": "Ton point quotidien ne pilote rien.",
    "likes": 9,
    "comments": 0,
-   "reach": 92,
-   "views": 152,
+   "reach": 93,
+   "views": 155,
    "saved": 1,
    "shares": 0,
    "total_interactions": 10
@@ -208,8 +208,8 @@
    "first_line": "Empiler des deals, ce n'est pas couvrir un marché.",
    "likes": 10,
    "comments": 0,
-   "reach": 90,
-   "views": 126,
+   "reach": 91,
+   "views": 127,
    "saved": 1,
    "shares": 0,
    "total_interactions": 11
