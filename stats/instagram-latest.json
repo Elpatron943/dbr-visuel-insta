@@ -1,19 +1,47 @@
 {
- "at": "2026-11-11T12:45:25.708Z",
+ "at": "2026-11-12T13:48:51.024Z",
  "account": {
   "username": "aryanadbr",
   "followers": 573,
   "following": 1082,
-  "media_count": 14
+  "media_count": 16
  },
  "last_7_days": {
-  "reach": 335,
-  "views": 636,
-  "accounts_engaged": 14,
-  "total_interactions": 27,
+  "reach": 337,
+  "views": 610,
+  "accounts_engaged": 10,
+  "total_interactions": 21,
   "follows_and_unfollows": null
  },
  "media": [
+  {
+   "permalink": "https://www.instagram.com/reel/DfohwG5usnO/",
+   "type": "REELS",
+   "at": "2026-11-12T07:33:53+0000",
+   "first_line": "Le directeur métier te dit : on y va.",
+   "likes": 1,
+   "comments": 0,
+   "reach": 11,
+   "views": 13,
+   "saved": 0,
+   "shares": 0,
+   "total_interactions": 1,
+   "ig_reels_avg_watch_time": 7870,
+   "ig_reels_video_view_total_time": 102313
+  },
+  {
+   "permalink": "https://www.instagram.com/p/DfnlVLZDgat/",
+   "type": "FEED",
+   "at": "2026-11-11T22:44:30+0000",
+   "first_line": "Trois signaux suffisent à sortir un deal du Commit.",
+   "likes": 2,
+   "comments": 0,
+   "reach": 4,
+   "views": 7,
+   "saved": 0,
+   "shares": 0,
+   "total_interactions": 2
+  },
   {
    "permalink": "https://www.instagram.com/reel/DfiDmr1I-kv/",
    "type": "REELS",
@@ -21,13 +49,13 @@
    "first_line": "Cette affaire devait signer ce trimestre.",
    "likes": 2,
    "comments": 0,
-   "reach": 75,
-   "views": 85,
+   "reach": 78,
+   "views": 86,
    "saved": 0,
    "shares": 0,
    "total_interactions": 2,
-   "ig_reels_avg_watch_time": 5206,
-   "ig_reels_video_view_total_time": 426954
+   "ig_reels_avg_watch_time": 5168,
+   "ig_reels_video_view_total_time": 428961
   },
   {
    "permalink": "https://www.instagram.com/reel/DfcD8SbARHK/",
@@ -66,8 +94,8 @@
    "first_line": "Ce que dit ton client n'arrive jamais intact au forecast.",
    "likes": 3,
    "comments": 1,
-   "reach": 32,
-   "views": 68,
+   "reach": 33,
+   "views": 69,
    "saved": 0,
    "shares": 0,
    "total_interactions": 4
@@ -109,8 +137,8 @@
    "first_line": "Ton deal n'est pas en retard. Il est mal classé.",
    "likes": 5,
    "comments": 1,
-   "reach": 25,
-   "views": 47,
+   "reach": 26,
+   "views": 51,
    "saved": 0,
    "shares": 0,
    "total_interactions": 7
