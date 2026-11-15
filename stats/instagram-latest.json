@@ -1,16 +1,16 @@
 {
- "at": "2026-11-14T12:13:59.938Z",
+ "at": "2026-11-15T12:47:04.701Z",
  "account": {
   "username": "aryanadbr",
-  "followers": 573,
-  "following": 1083,
+  "followers": 574,
+  "following": 1080,
   "media_count": 18
  },
  "last_7_days": {
-  "reach": 157,
-  "views": 341,
-  "accounts_engaged": 7,
-  "total_interactions": 12,
+  "reach": 190,
+  "views": 380,
+  "accounts_engaged": 5,
+  "total_interactions": 10,
   "follows_and_unfollows": null
  },
  "media": [
@@ -19,15 +19,15 @@
    "type": "REELS",
    "at": "2026-11-14T11:31:36+0000",
    "first_line": "Le projet est prioritaire.",
-   "likes": 0,
+   "likes": 1,
    "comments": 0,
-   "reach": 5,
-   "views": 14,
+   "reach": 63,
+   "views": 72,
    "saved": 0,
    "shares": 0,
-   "total_interactions": 0,
-   "ig_reels_avg_watch_time": 2145,
-   "ig_reels_video_view_total_time": 12871
+   "total_interactions": 1,
+   "ig_reels_avg_watch_time": 1893,
+   "ig_reels_video_view_total_time": 130669
   },
   {
    "permalink": "https://www.instagram.com/reel/DfrKE6DIeEQ/",
@@ -36,13 +36,13 @@
    "first_line": "On fait déjà ça avec Excel.",
    "likes": 0,
    "comments": 0,
-   "reach": 31,
-   "views": 38,
+   "reach": 32,
+   "views": 39,
    "saved": 0,
    "shares": 0,
    "total_interactions": 0,
-   "ig_reels_avg_watch_time": 6550,
-   "ig_reels_video_view_total_time": 229284
+   "ig_reels_avg_watch_time": 6612,
+   "ig_reels_video_view_total_time": 244653
   },
   {
    "permalink": "https://www.instagram.com/reel/DfohwG5usnO/",
@@ -66,8 +66,8 @@
    "first_line": "Trois signaux suffisent à sortir un deal du Commit.",
    "likes": 2,
    "comments": 0,
-   "reach": 5,
-   "views": 9,
+   "reach": 6,
+   "views": 10,
    "saved": 0,
    "shares": 0,
    "total_interactions": 2
@@ -79,13 +79,13 @@
    "first_line": "Cette affaire devait signer ce trimestre.",
    "likes": 2,
    "comments": 0,
-   "reach": 79,
-   "views": 87,
+   "reach": 80,
+   "views": 88,
    "saved": 0,
    "shares": 0,
    "total_interactions": 2,
-   "ig_reels_avg_watch_time": 5119,
-   "ig_reels_video_view_total_time": 429996
+   "ig_reels_avg_watch_time": 5075,
+   "ig_reels_video_view_total_time": 431402
   },
   {
    "permalink": "https://www.instagram.com/reel/DfcD8SbARHK/",
@@ -94,13 +94,13 @@
    "first_line": "On n'a pas de budget cette année.",
    "likes": 2,
    "comments": 0,
-   "reach": 130,
-   "views": 151,
+   "reach": 131,
+   "views": 152,
    "saved": 0,
    "shares": 0,
    "total_interactions": 3,
-   "ig_reels_avg_watch_time": 5661,
-   "ig_reels_video_view_total_time": 730293
+   "ig_reels_avg_watch_time": 5624,
+   "ig_reels_video_view_total_time": 731132
   },
   {
    "permalink": "https://www.instagram.com/reel/DfaIWxCj6nO/",
@@ -109,13 +109,13 @@
    "first_line": "Votre concurrent est moins cher.",
    "likes": 1,
    "comments": 0,
-   "reach": 104,
-   "views": 115,
+   "reach": 105,
+   "views": 116,
    "saved": 0,
    "shares": 0,
    "total_interactions": 1,
-   "ig_reels_avg_watch_time": 4745,
-   "ig_reels_video_view_total_time": 522042
+   "ig_reels_avg_watch_time": 4715,
+   "ig_reels_video_view_total_time": 523443
   },
   {
    "permalink": "https://www.instagram.com/p/DfVCnc1iWlz/",
@@ -124,8 +124,8 @@
    "first_line": "Ce que dit ton client n'arrive jamais intact au forecast.",
    "likes": 3,
    "comments": 1,
-   "reach": 34,
-   "views": 70,
+   "reach": 35,
+   "views": 71,
    "saved": 0,
    "shares": 0,
    "total_interactions": 4
@@ -137,7 +137,7 @@
    "first_line": "Rappelez-moi la semaine prochaine.",
    "likes": 3,
    "comments": 0,
-   "reach": 142,
+   "reach": 143,
    "views": 164,
    "saved": 1,
    "shares": 0,
@@ -223,7 +223,7 @@
    "first_line": "Commercial B2B : ton client te dit « c'est trop cher ». Tu réponds quoi ?",
    "likes": 5,
    "comments": 0,
-   "reach": 112,
+   "reach": 113,
    "views": 119,
    "saved": 1,
    "shares": 0,
@@ -238,13 +238,13 @@
    "first_line": "Commercial B2B : tu sais déjà que ton prospect ne va pas signer. Mais tu te racontes une histoire.",
    "likes": 2,
    "comments": 0,
-   "reach": 64,
-   "views": 70,
+   "reach": 65,
+   "views": 71,
    "saved": 1,
    "shares": 0,
    "total_interactions": 3,
-   "ig_reels_avg_watch_time": 5135,
-   "ig_reels_video_view_total_time": 323519
+   "ig_reels_avg_watch_time": 5098,
+   "ig_reels_video_view_total_time": 326273
   },
   {
    "permalink": "https://www.instagram.com/reel/De4RYIzEmge/",
