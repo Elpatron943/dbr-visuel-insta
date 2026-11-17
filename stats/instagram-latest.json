@@ -1,16 +1,16 @@
 {
- "at": "2026-11-16T13:41:52.681Z",
+ "at": "2026-11-17T14:28:04.337Z",
  "account": {
   "username": "aryanadbr",
-  "followers": 573,
-  "following": 1080,
+  "followers": 571,
+  "following": 1076,
   "media_count": 18
  },
  "last_7_days": {
-  "reach": 136,
-  "views": 299,
-  "accounts_engaged": 4,
-  "total_interactions": 9,
+  "reach": 113,
+  "views": 242,
+  "accounts_engaged": 3,
+  "total_interactions": 5,
   "follows_and_unfollows": null
  },
  "media": [
@@ -36,13 +36,13 @@
    "first_line": "On fait déjà ça avec Excel.",
    "likes": 0,
    "comments": 0,
-   "reach": 32,
-   "views": 39,
+   "reach": 33,
+   "views": 41,
    "saved": 0,
    "shares": 0,
    "total_interactions": 0,
-   "ig_reels_avg_watch_time": 6612,
-   "ig_reels_video_view_total_time": 244653
+   "ig_reels_avg_watch_time": 6316,
+   "ig_reels_video_view_total_time": 246338
   },
   {
    "permalink": "https://www.instagram.com/reel/DfohwG5usnO/",
@@ -94,13 +94,13 @@
    "first_line": "On n'a pas de budget cette année.",
    "likes": 2,
    "comments": 0,
-   "reach": 131,
-   "views": 152,
+   "reach": 132,
+   "views": 153,
    "saved": 0,
    "shares": 0,
    "total_interactions": 3,
-   "ig_reels_avg_watch_time": 5624,
-   "ig_reels_video_view_total_time": 731132
+   "ig_reels_avg_watch_time": 5585,
+   "ig_reels_video_view_total_time": 731746
   },
   {
    "permalink": "https://www.instagram.com/reel/DfaIWxCj6nO/",
@@ -137,13 +137,13 @@
    "first_line": "Rappelez-moi la semaine prochaine.",
    "likes": 3,
    "comments": 0,
-   "reach": 143,
-   "views": 164,
+   "reach": 144,
+   "views": 165,
    "saved": 1,
    "shares": 0,
    "total_interactions": 4,
-   "ig_reels_avg_watch_time": 7588,
-   "ig_reels_video_view_total_time": 1168594
+   "ig_reels_avg_watch_time": 7544,
+   "ig_reels_video_view_total_time": 1169415
   },
   {
    "permalink": "https://www.instagram.com/reel/DfQSn8ImT9t/",
@@ -152,13 +152,13 @@
    "first_line": "Ta prévision du trimestre, tu la construis comment ?",
    "likes": 3,
    "comments": 0,
-   "reach": 53,
-   "views": 58,
+   "reach": 54,
+   "views": 59,
    "saved": 0,
    "shares": 0,
    "total_interactions": 3,
-   "ig_reels_avg_watch_time": 4721,
-   "ig_reels_video_view_total_time": 273833
+   "ig_reels_avg_watch_time": 4870,
+   "ig_reels_video_view_total_time": 287347
   },
   {
    "permalink": "https://www.instagram.com/p/DfKvge0GsUh/",
@@ -251,13 +251,13 @@
    "type": "REELS",
    "at": "2026-10-24T13:46:15+0000",
    "first_line": "Commercial B2B : 70 % de tes rendez-vous ne sont pas des projets. Même quand ils te disent le contraire.",
-   "likes": 6,
+   "likes": 5,
    "comments": 0,
    "reach": 146,
    "views": 161,
    "saved": 0,
    "shares": 0,
-   "total_interactions": 6,
+   "total_interactions": 5,
    "ig_reels_avg_watch_time": 6821,
    "ig_reels_video_view_total_time": 1091464
   },
@@ -279,13 +279,13 @@
    "type": "FEED",
    "at": "2026-10-19T17:13:32+0000",
    "first_line": "Empiler des deals, ce n'est pas couvrir un marché.",
-   "likes": 10,
+   "likes": 9,
    "comments": 0,
    "reach": 92,
    "views": 128,
    "saved": 1,
    "shares": 0,
-   "total_interactions": 11
+   "total_interactions": 10
   }
  ],
  "errors": []
