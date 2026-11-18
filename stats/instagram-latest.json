@@ -1,14 +1,14 @@
 {
- "at": "2026-11-17T14:28:04.337Z",
+ "at": "2026-11-18T14:01:41.234Z",
  "account": {
   "username": "aryanadbr",
-  "followers": 571,
-  "following": 1076,
+  "followers": 570,
+  "following": 1071,
   "media_count": 18
  },
  "last_7_days": {
-  "reach": 113,
-  "views": 242,
+  "reach": 115,
+  "views": 239,
   "accounts_engaged": 3,
   "total_interactions": 5,
   "follows_and_unfollows": null
@@ -21,13 +21,13 @@
    "first_line": "Le projet est prioritaire.",
    "likes": 1,
    "comments": 0,
-   "reach": 66,
-   "views": 77,
+   "reach": 69,
+   "views": 80,
    "saved": 0,
    "shares": 0,
    "total_interactions": 1,
-   "ig_reels_avg_watch_time": 1888,
-   "ig_reels_video_view_total_time": 135996
+   "ig_reels_avg_watch_time": 1907,
+   "ig_reels_video_view_total_time": 143037
   },
   {
    "permalink": "https://www.instagram.com/reel/DfrKE6DIeEQ/",
@@ -36,13 +36,13 @@
    "first_line": "On fait déjà ça avec Excel.",
    "likes": 0,
    "comments": 0,
-   "reach": 33,
-   "views": 41,
+   "reach": 34,
+   "views": 42,
    "saved": 0,
    "shares": 0,
    "total_interactions": 0,
-   "ig_reels_avg_watch_time": 6316,
-   "ig_reels_video_view_total_time": 246338
+   "ig_reels_avg_watch_time": 6198,
+   "ig_reels_video_view_total_time": 247925
   },
   {
    "permalink": "https://www.instagram.com/reel/DfohwG5usnO/",
@@ -124,8 +124,8 @@
    "first_line": "Ce que dit ton client n'arrive jamais intact au forecast.",
    "likes": 3,
    "comments": 1,
-   "reach": 35,
-   "views": 71,
+   "reach": 36,
+   "views": 72,
    "saved": 0,
    "shares": 0,
    "total_interactions": 4
@@ -137,13 +137,13 @@
    "first_line": "Rappelez-moi la semaine prochaine.",
    "likes": 3,
    "comments": 0,
-   "reach": 144,
-   "views": 165,
+   "reach": 145,
+   "views": 166,
    "saved": 1,
    "shares": 0,
    "total_interactions": 4,
-   "ig_reels_avg_watch_time": 7544,
-   "ig_reels_video_view_total_time": 1169415
+   "ig_reels_avg_watch_time": 7503,
+   "ig_reels_video_view_total_time": 1170616
   },
   {
    "permalink": "https://www.instagram.com/reel/DfQSn8ImT9t/",
@@ -195,7 +195,7 @@
    "first_line": "Commercial B2B : qu'a décidé ton client depuis ta démo ?",
    "likes": 3,
    "comments": 0,
-   "reach": 30,
+   "reach": 31,
    "views": 54,
    "saved": 0,
    "shares": 0,
@@ -268,8 +268,8 @@
    "first_line": "Ton point quotidien ne pilote rien.",
    "likes": 9,
    "comments": 0,
-   "reach": 94,
-   "views": 157,
+   "reach": 95,
+   "views": 158,
    "saved": 1,
    "shares": 0,
    "total_interactions": 10
@@ -281,8 +281,8 @@
    "first_line": "Empiler des deals, ce n'est pas couvrir un marché.",
    "likes": 9,
    "comments": 0,
-   "reach": 92,
-   "views": 128,
+   "reach": 93,
+   "views": 129,
    "saved": 1,
    "shares": 0,
    "total_interactions": 10
