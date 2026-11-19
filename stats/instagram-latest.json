@@ -1,16 +1,16 @@
 {
- "at": "2026-11-18T14:01:41.234Z",
+ "at": "2026-11-19T14:28:49.204Z",
  "account": {
   "username": "aryanadbr",
-  "followers": 570,
-  "following": 1071,
+  "followers": 567,
+  "following": 1073,
   "media_count": 18
  },
  "last_7_days": {
-  "reach": 115,
-  "views": 239,
-  "accounts_engaged": 3,
-  "total_interactions": 5,
+  "reach": 104,
+  "views": 207,
+  "accounts_engaged": 2,
+  "total_interactions": 2,
   "follows_and_unfollows": null
  },
  "media": [
