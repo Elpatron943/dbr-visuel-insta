@@ -42,7 +42,7 @@ Chaque geste contre un engagement.
 Tu réponds à quel niveau aujourd'hui ?
 
 Premier commentaire :
-Les objections de la négociation, à cinq niveaux, dans DBR Sales : https://daily-business-review.com/tarifs?utm_source=linkedin&utm_medium=social&utm_campaign=carrousel-2211#acces-trial
+Fais le test de ton niveau commercial : https://daily-business-review.com/test-commercial?utm_source=linkedin&utm_medium=social&utm_campaign=carrousel-2211
 
 ## X (moins de 280 caractères, images 01, 03, 05 et 07 conseillées)
 « Il faut me faire une remise. »
