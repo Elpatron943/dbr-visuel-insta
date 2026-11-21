@@ -1,0 +1,20 @@
+{
+ "format": "portrait",
+ "kicker": "SKILLS DBR · NÉGOCIATION",
+ "slides": [
+  {"layout": "cover", "title": "« Il faut me faire une *remise*. »", "subtitle": "Cinq réponses, de la plus simple à celle qui fait signer. Tirées de la base d'objections DBR."},
+  {"layout": "quote", "title": "Une demande de remise est souvent un *test*", "subtitle": "L'acheteur veut savoir s'il a négocié. Il ne cherche pas forcément à payer moins."},
+  {"layout": "compare", "title": "Céder, ou *échanger* ?",
+   "a": {"tag": "Le piège", "title": "Baisser pour clore", "items": ["Parler chiffre avant de comprendre", "Donner sans rien demander en retour", "Laisser la date de signature floue"]},
+   "b": {"tag": "Ce qui marche", "title": "Échanger", "items": ["Faire préciser ce qu'il veut améliorer", "Relier le geste à une contrepartie", "Faire nommer qui valide, et quand"]}},
+  {"layout": "list", "kicker": "NIVEAUX 1 ET 2 · ACCUEILLIR, CREUSER", "title": "D'abord, faire *préciser*", "source": "Base Skills DBR",
+   "items": [
+    {"title": "« Que souhaitez-vous améliorer dans l'offre ? »", "text": "Tu fais préciser avant de parler chiffre."},
+    {"title": "« Quel montant vous permettrait de dire oui aujourd'hui ? »", "text": "Tu obtiens la cible de l'acheteur."}
+   ]},
+  {"layout": "quote", "kicker": "NIVEAU 3 · ISOLER ET CHIFFRER", "title": "« Je peux étudier un geste si la durée ou le volume *augmente*. »", "subtitle": "Puis : « Quelle durée êtes-vous prêt à engager ? » La remise devient une contrepartie.", "source": "Base Skills DBR"},
+  {"layout": "quote", "kicker": "NIVEAU 4 · REPLACER DANS LA DÉCISION", "title": "« Qui valide ce geste chez vous et chez nous, et à quelle *date* signe-t-on ? »", "subtitle": "Le circuit de validation et la date de signature apparaissent.", "source": "Base Skills DBR"},
+  {"layout": "quote", "kicker": "NIVEAU 5 · RETOURNER EN ACCÉLÉRATEUR", "title": "« Si j'obtiens ce geste, signez-vous cette *semaine* ? »", "subtitle": "« Sinon je garde mon prix. La remise est-elle votre vrai frein, ou négociez-vous par réflexe ? » Le geste est conditionné, le vrai frein apparaît.", "source": "Base Skills DBR"},
+  {"layout": "cta", "title": "Chaque geste contre un *engagement*", "subtitle": "Les objections de la négociation, traitées à cinq niveaux, dans DBR Sales. Sur daily-business-review.com.", "button": "Essayer DBR Sales"}
+ ]
+}
