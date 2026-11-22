@@ -1,14 +1,14 @@
 {
- "at": "2026-11-21T13:30:41.128Z",
+ "at": "2026-11-22T13:24:18.656Z",
  "account": {
   "username": "aryanadbr",
-  "followers": 562,
-  "following": 1070,
+  "followers": 557,
+  "following": 1068,
   "media_count": 19
  },
  "last_7_days": {
-  "reach": 30,
-  "views": 50,
+  "reach": 23,
+  "views": 39,
   "accounts_engaged": 0,
   "total_interactions": 0,
   "follows_and_unfollows": null
@@ -21,13 +21,13 @@
    "first_line": "Tu vas voir celui qui paie trop tard.",
    "likes": 0,
    "comments": 0,
-   "reach": 10,
-   "views": 12,
+   "reach": 12,
+   "views": 15,
    "saved": 0,
    "shares": 0,
    "total_interactions": 0,
-   "ig_reels_avg_watch_time": 4373,
-   "ig_reels_video_view_total_time": 43737
+   "ig_reels_avg_watch_time": 4339,
+   "ig_reels_video_view_total_time": 52071
   },
   {
    "permalink": "https://www.instagram.com/reel/DfuGrKDxwaV/",
@@ -152,13 +152,13 @@
    "first_line": "Rappelez-moi la semaine prochaine.",
    "likes": 3,
    "comments": 0,
-   "reach": 145,
+   "reach": 146,
    "views": 167,
    "saved": 1,
    "shares": 0,
    "total_interactions": 4,
-   "ig_reels_avg_watch_time": 7503,
-   "ig_reels_video_view_total_time": 1170616
+   "ig_reels_avg_watch_time": 7636,
+   "ig_reels_video_view_total_time": 1198969
   },
   {
    "permalink": "https://www.instagram.com/reel/DfQSn8ImT9t/",
