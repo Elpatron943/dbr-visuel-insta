@@ -1,0 +1,32 @@
+{
+ "format": "portrait",
+ "kicker": "S1 · ÉP. 5 · JOUR 1",
+ "slides": [
+  {"layout": "cover", "title": "Le directeur avait dit oui. Le *budget* dépendait d'un autre.", "subtitle": "L'énigme de la semaine. Un deal fictif. Réponse dimanche."},
+  {"layout": "list", "title": "Le deal, en quatre *étapes*", "subtitle": "Deal fictif, sans nom ni chiffre.",
+   "items": [
+    {"title": "Premier rendez-vous", "text": "Le directeur métier décrit son besoin et se dit convaincu."},
+    {"title": "Démonstration", "text": "Son équipe approuve. Il parle déjà du déploiement."},
+    {"title": "Proposition", "text": "Envoyée le lendemain, relue et approuvée par le directeur."},
+    {"title": "Puis plus rien", "text": "Trois relances, une réponse courte, et le deal s'arrête."}
+   ]},
+  {"layout": "quote", "title": "« Je dois la faire *valider* par la direction. »", "subtitle": "La phrase arrive après la proposition. Le commercial l'entend pour la première fois."},
+  {"layout": "compare", "title": "Ce qu'il savait, ce qu'il n'a jamais *vérifié*",
+   "a": {"tag": "Il savait", "title": "Le besoin", "items": ["Le problème de l'équipe", "L'envie du directeur métier", "Les fonctions attendues"]},
+   "b": {"tag": "Jamais vérifié", "title": "La décision", "items": ["Qui signe le budget", "Ce que ce signataire attend", "La date où il décide"]}},
+  {"layout": "list", "title": "Trois *indices* à relire", "subtitle": "Ils étaient là dès le début.",
+   "items": [
+    {"title": "« Mon équipe », jamais « mon budget »", "text": "Le directeur parlait du besoin, jamais de l'argent."},
+    {"title": "Aucune date de décision", "text": "Personne n'a demandé quand et par qui le choix serait fait."},
+    {"title": "Un seul interlocuteur", "text": "Aucun rendez-vous prévu avec la personne qui signe."}
+   ]},
+  {"layout": "list", "title": "Quand fallait-il aller voir celui qui *signe* ?", "subtitle": "Réponds 1, 2, 3 ou 4 en commentaire.",
+   "items": [
+    {"title": "Dès le premier rendez-vous", "text": "Avant même de parler de la solution."},
+    {"title": "Juste après la démonstration", "text": "Quand le directeur métier est convaincu."},
+    {"title": "Avec la proposition", "text": "Pour la présenter à celui qui décide."},
+    {"title": "Jamais", "text": "C'est au directeur métier de défendre le projet."}
+   ]},
+  {"layout": "cta", "title": "La réponse *dimanche*", "subtitle": "Toute la semaine : comment trouver qui signe le budget, et quand aller le voir. En attendant, mesure ton niveau sur daily-business-review.com.", "button": "Faire le test commercial"}
+ ]
+}
