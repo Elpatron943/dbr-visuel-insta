@@ -1,14 +1,14 @@
 {
- "at": "2026-11-24T15:56:16.605Z",
+ "at": "2026-11-25T15:39:14.982Z",
  "account": {
   "username": "aryanadbr",
   "followers": 558,
-  "following": 1071,
+  "following": 1069,
   "media_count": 20
  },
  "last_7_days": {
-  "reach": 25,
-  "views": 53,
+  "reach": 27,
+  "views": 54,
   "accounts_engaged": 1,
   "total_interactions": 3,
   "follows_and_unfollows": null
@@ -21,8 +21,8 @@
    "first_line": "Le directeur avait dit oui. Le budget dépendait d'un autre.",
    "likes": 0,
    "comments": 0,
-   "reach": 4,
-   "views": 10,
+   "reach": 6,
+   "views": 14,
    "saved": 0,
    "shares": 0,
    "total_interactions": 0
@@ -34,13 +34,13 @@
    "first_line": "Tu vas voir celui qui paie trop tard.",
    "likes": 1,
    "comments": 0,
-   "reach": 13,
-   "views": 16,
+   "reach": 15,
+   "views": 18,
    "saved": 0,
    "shares": 0,
    "total_interactions": 1,
-   "ig_reels_avg_watch_time": 4016,
-   "ig_reels_video_view_total_time": 56233
+   "ig_reels_avg_watch_time": 3775,
+   "ig_reels_video_view_total_time": 60402
   },
   {
    "permalink": "https://www.instagram.com/reel/DfuGrKDxwaV/",
@@ -49,13 +49,13 @@
    "first_line": "Le projet est prioritaire.",
    "likes": 2,
    "comments": 0,
-   "reach": 72,
-   "views": 84,
+   "reach": 73,
+   "views": 85,
    "saved": 0,
    "shares": 0,
    "total_interactions": 2,
-   "ig_reels_avg_watch_time": 1935,
-   "ig_reels_video_view_total_time": 154859
+   "ig_reels_avg_watch_time": 1929,
+   "ig_reels_video_view_total_time": 156291
   },
   {
    "permalink": "https://www.instagram.com/reel/DfrKE6DIeEQ/",
