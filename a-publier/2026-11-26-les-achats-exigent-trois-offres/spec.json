@@ -1,0 +1,20 @@
+{
+ "format": "portrait",
+ "kicker": "SKILLS DBR · NÉGOCIATION",
+ "slides": [
+  {"layout": "cover", "title": "« Les achats exigent trois *offres*. »", "subtitle": "Une scène à deux voix. Ce que dit le client, puis ce que tu réponds."},
+  {"layout": "quote", "kicker": "LE CLIENT", "title": "« Votre démonstration était très bien. Mais les achats exigent trois *offres*. »", "subtitle": "Scène fictive. Une règle interne réelle, qui peut aussi servir à faire baisser le prix.", "source": "Base Skills DBR"},
+  {"layout": "compare", "title": "Subir la règle, ou la *comprendre*",
+   "a": {"tag": "Le réflexe", "title": "Subir", "items": ["Envoyer l'offre et attendre", "Annoncer un geste avant d'être comparé", "Laisser les achats écrire seuls les critères"]},
+   "b": {"tag": "La réponse", "title": "Comprendre", "items": ["Faire décrire la procédure", "Apprendre les critères et leur poids", "Rencontrer l'acheteur avant la consultation"]}},
+  {"layout": "quote", "kicker": "TOI", "title": "« Je comprends. Comment se déroule votre *procédure* d'achat ? »", "subtitle": "Tu fais décrire avant de contourner.", "source": "Base Skills DBR"},
+  {"layout": "list", "kicker": "TOI, ENSUITE", "title": "Trois questions pour reprendre la *main*", "source": "Base Skills DBR",
+   "items": [
+    {"title": "« Y a-t-il un seuil où la règle ne s'applique pas ? »", "text": "Tu cherches l'exception."},
+    {"title": "« Sur quels critères comparent-ils les offres ? »", "text": "Et lesquels pèsent le plus : tu apprends à y répondre."},
+    {"title": "« Puis-je rencontrer l'acheteur avant la consultation ? »", "text": "Tu influences le cahier des charges quand c'est encore possible."}
+   ]},
+  {"layout": "quote", "kicker": "TOI, POUR FINIR", "title": "« Sans cette règle, quel fournisseur *retiendriez*-vous ? »", "subtitle": "« Si c'est nous, qu'est-ce qui vous empêche de nous défendre auprès des achats ? Sinon, qu'est-ce qui nous manque ? » Tu obtiens la préférence réelle, puis tu aides à la défendre.", "source": "Base Skills DBR"},
+  {"layout": "cta", "title": "Fais *décrire* avant de contourner", "subtitle": "Les objections de la négociation, traitées à cinq niveaux, dans DBR Sales. Sur daily-business-review.com.", "button": "Essayer DBR Sales"}
+ ]
+}
