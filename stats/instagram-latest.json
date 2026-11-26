@@ -1,14 +1,14 @@
 {
- "at": "2026-11-25T15:39:14.982Z",
+ "at": "2026-11-26T15:21:48.461Z",
  "account": {
   "username": "aryanadbr",
   "followers": 558,
-  "following": 1069,
+  "following": 1068,
   "media_count": 20
  },
  "last_7_days": {
-  "reach": 27,
-  "views": 54,
+  "reach": 29,
+  "views": 57,
   "accounts_engaged": 1,
   "total_interactions": 3,
   "follows_and_unfollows": null
@@ -21,8 +21,8 @@
    "first_line": "Le directeur avait dit oui. Le budget dépendait d'un autre.",
    "likes": 0,
    "comments": 0,
-   "reach": 6,
-   "views": 14,
+   "reach": 7,
+   "views": 15,
    "saved": 0,
    "shares": 0,
    "total_interactions": 0
@@ -64,13 +64,13 @@
    "first_line": "On fait déjà ça avec Excel.",
    "likes": 1,
    "comments": 0,
-   "reach": 37,
-   "views": 46,
+   "reach": 39,
+   "views": 47,
    "saved": 0,
    "shares": 0,
    "total_interactions": 1,
-   "ig_reels_avg_watch_time": 6144,
-   "ig_reels_video_view_total_time": 270376
+   "ig_reels_avg_watch_time": 6024,
+   "ig_reels_video_view_total_time": 271119
   },
   {
    "permalink": "https://www.instagram.com/reel/DfohwG5usnO/",
@@ -79,13 +79,13 @@
    "first_line": "Le directeur métier te dit : on y va.",
    "likes": 1,
    "comments": 0,
-   "reach": 19,
-   "views": 28,
+   "reach": 20,
+   "views": 29,
    "saved": 0,
    "shares": 0,
    "total_interactions": 1,
-   "ig_reels_avg_watch_time": 19168,
-   "ig_reels_video_view_total_time": 440874
+   "ig_reels_avg_watch_time": 18409,
+   "ig_reels_video_view_total_time": 441838
   },
   {
    "permalink": "https://www.instagram.com/p/DfnlVLZDgat/",
