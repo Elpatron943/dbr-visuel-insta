@@ -1,16 +1,16 @@
 {
- "at": "2026-11-26T15:21:48.461Z",
+ "at": "2026-11-27T15:08:50.217Z",
  "account": {
   "username": "aryanadbr",
-  "followers": 558,
+  "followers": 557,
   "following": 1068,
   "media_count": 20
  },
  "last_7_days": {
-  "reach": 29,
-  "views": 57,
-  "accounts_engaged": 1,
-  "total_interactions": 3,
+  "reach": 19,
+  "views": 40,
+  "accounts_engaged": 2,
+  "total_interactions": 5,
   "follows_and_unfollows": null
  },
  "media": [
@@ -21,8 +21,8 @@
    "first_line": "Le directeur avait dit oui. Le budget dépendait d'un autre.",
    "likes": 0,
    "comments": 0,
-   "reach": 7,
-   "views": 15,
+   "reach": 8,
+   "views": 16,
    "saved": 0,
    "shares": 0,
    "total_interactions": 0
@@ -34,7 +34,7 @@
    "first_line": "Tu vas voir celui qui paie trop tard.",
    "likes": 1,
    "comments": 0,
-   "reach": 15,
+   "reach": 16,
    "views": 18,
    "saved": 0,
    "shares": 0,
@@ -47,15 +47,15 @@
    "type": "REELS",
    "at": "2026-11-14T11:31:36+0000",
    "first_line": "Le projet est prioritaire.",
-   "likes": 2,
+   "likes": 3,
    "comments": 0,
-   "reach": 73,
-   "views": 85,
+   "reach": 74,
+   "views": 86,
    "saved": 0,
    "shares": 0,
-   "total_interactions": 2,
-   "ig_reels_avg_watch_time": 1929,
-   "ig_reels_video_view_total_time": 156291
+   "total_interactions": 3,
+   "ig_reels_avg_watch_time": 2553,
+   "ig_reels_video_view_total_time": 211901
   },
   {
    "permalink": "https://www.instagram.com/reel/DfrKE6DIeEQ/",
@@ -135,15 +135,15 @@
    "type": "REELS",
    "at": "2026-11-06T17:21:35+0000",
    "first_line": "Votre concurrent est moins cher.",
-   "likes": 1,
+   "likes": 2,
    "comments": 0,
-   "reach": 105,
-   "views": 116,
+   "reach": 106,
+   "views": 117,
    "saved": 0,
    "shares": 0,
-   "total_interactions": 1,
-   "ig_reels_avg_watch_time": 4715,
-   "ig_reels_video_view_total_time": 523443
+   "total_interactions": 2,
+   "ig_reels_avg_watch_time": 4810,
+   "ig_reels_video_view_total_time": 538754
   },
   {
    "permalink": "https://www.instagram.com/p/DfVCnc1iWlz/",
