@@ -1,0 +1,95 @@
+{
+ "format": "portrait",
+ "kicker": "TEST 1 OU 2 · L'URGENCE",
+ "slides": [
+  {
+   "layout": "cover",
+   "title": "Deux clients pressés. Un seul l'est *vraiment*.",
+   "subtitle": "Le test 1 ou 2. Lis les deux phrases, choisis, puis glisse pour la réponse."
+  },
+  {
+   "layout": "quote",
+   "kicker": "CLIENT 1",
+   "title": "« C'est une priorité pour nous, on veut aller *vite*. »",
+   "subtitle": "Deal fictif. Il est enthousiaste, il relance même avant toi."
+  },
+  {
+   "layout": "quote",
+   "kicker": "CLIENT 2",
+   "title": "« Notre contrat actuel prend fin le 31 mars. Après, nos équipes n'ont plus d'*outil*. »",
+   "subtitle": "Deal fictif. Il parle peu, il pose des questions précises."
+  },
+  {
+   "layout": "quote",
+   "kicker": "À TOI",
+   "title": "1 ou 2 : lequel a une vraie *urgence* ?",
+   "subtitle": "Réponds en commentaire avant de glisser."
+  },
+  {
+   "layout": "list",
+   "kicker": "LA RÉPONSE",
+   "title": "Le client *2*",
+   "items": [
+    {
+     "title": "Une date fixée hors de ton offre",
+     "text": "La fin du contrat arrive, que tu sois là ou non."
+    },
+    {
+     "title": "Une conséquence s'il ne décide pas",
+     "text": "Sans décision, ses équipes travaillent sans outil."
+    },
+    {
+     "title": "Une raison de décider maintenant",
+     "text": "Le client 1 a l'envie. Le client 2 a l'échéance."
+    }
+   ]
+  },
+  {
+   "layout": "compare",
+   "title": "Fausse ou vraie *urgence*",
+   "a": {
+    "tag": "Fausse urgence",
+    "title": "L'envie",
+    "items": [
+     "« On veut aller vite »",
+     "Une priorité parmi d'autres",
+     "Une date que tu as proposée"
+    ]
+   },
+   "b": {
+    "tag": "Vraie urgence",
+    "title": "L'échéance",
+    "items": [
+     "Une date que le client subit",
+     "Une conséquence s'il attend",
+     "Une décision qui ne peut pas glisser"
+    ]
+   }
+  },
+  {
+   "layout": "list",
+   "kicker": "AVANT DE METTRE LE DEAL EN COMMIT",
+   "title": "Trois questions pour *tester* l'urgence",
+   "items": [
+    {
+     "title": "« Qu'est-ce qui fixe cette date ? »",
+     "text": "Tu cherches l'événement, pas l'envie."
+    },
+    {
+     "title": "« Que se passe-t-il si rien n'est décidé ? »",
+     "text": "Tu fais dire la conséquence par le client."
+    },
+    {
+     "title": "« Que coûte le problème d'ici là ? »",
+     "text": "Tu rends visible le coût d'attendre."
+    }
+   ]
+  },
+  {
+   "layout": "cta",
+   "title": "Pas de date, pas d'*urgence*",
+   "subtitle": "Les compelling events et la qualification de chaque deal, dans DBR Sales. Sur daily-business-review.com.",
+   "button": "Essayer DBR Sales"
+  }
+ ]
+}
