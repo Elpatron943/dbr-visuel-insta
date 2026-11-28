@@ -1,0 +1,30 @@
+{
+ "format": "portrait",
+ "kicker": "COULISSES · DBR SALES",
+ "slides": [
+  {"layout": "cover", "title": "Ton rendez-vous est demain. Ta fiche est *prête* ?", "subtitle": "Préparer un rendez-vous avec la fiche du deal, dans DBR Sales. Deal fictif."},
+  {"layout": "quote", "kicker": "LA VEILLE", "title": "Demain 10 h, deuxième rendez-vous. Tu sais ce que tu vas *demander* ?", "subtitle": "Le réflexe : relire ses notes. Ici, on part de la fiche du deal, en quatre étapes."},
+  {"layout": "list", "kicker": "ÉTAPE 1 · EN HAUT DE LA FICHE", "title": "Repère la jauge la plus *basse*", "items": [
+    {"title": "Pourquoi projet", "text": "Pourquoi le client veut changer."},
+    {"title": "Pourquoi maintenant", "text": "Ce qui l'oblige à décider à cette date."},
+    {"title": "Pourquoi nous", "text": "Ce qui le ferait choisir ton offre plutôt qu'une autre."}
+  ]},
+  {"layout": "quote", "kicker": "ÉTAPE 2", "title": "Chaque « Je ne sais pas » devient une *question*", "subtitle": "Un élément coché « Je ne sais pas » compte pour zéro dans la jauge. C'est ta première question de demain."},
+  {"layout": "list", "kicker": "ÉTAPE 3", "title": "Ouvre l'*organigramme* du deal", "items": [
+    {"title": "Une silhouette avec un point d'interrogation", "text": "Le décideur économique ou le champion n'est pas encore connu."},
+    {"title": "Le bouton Identifier", "text": "Tu crées le contact dès que tu as son nom."},
+    {"title": "Les liens « rend compte à »", "text": "Tu vois qui pèse sur qui avant d'entrer dans la salle."}
+  ]},
+  {"layout": "list", "kicker": "ÉTAPE 4", "title": "Pose un *parcours* sur le deal", "items": [
+    {"title": "Le déroulé du rendez-vous", "text": "Tes questions, tes arguments et les objections possibles, dans l'ordre."},
+    {"title": "Des blocs en rouge", "text": "Une information de qualification manque encore."},
+    {"title": "Un bouton pour la renseigner", "text": "Tu vas directement à la zone de la fiche à compléter."}
+  ]},
+  {"layout": "list", "kicker": "DEAL FICTIF · CE QUE TU EMPORTES", "title": "Trois questions pour *demain*", "items": [
+    {"title": "« Quand votre contrat actuel prend-il fin ? »", "text": "Pourquoi maintenant : la date manque."},
+    {"title": "« Qui valide le budget avec vous ? »", "text": "Organigramme : le décideur économique reste à identifier."},
+    {"title": "« Qu'est-ce qui vous ferait choisir un autre ? »", "text": "Pourquoi nous : la jauge la plus basse."}
+  ]},
+  {"layout": "cta", "title": "Prépare la *fiche*, pas seulement le discours", "subtitle": "Jauges des trois Pourquoi, organigramme et parcours du deal, dans DBR Sales. Sur daily-business-review.com.", "button": "Essayer DBR Sales"}
+ ]
+}
